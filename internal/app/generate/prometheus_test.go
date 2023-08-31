@@ -229,7 +229,7 @@ func TestIntegrationAppServiceGenerate(t *testing.T) {
 								},
 								{
 									Record: "slo:sli_error:ratio_rate30d",
-									Expr:   "sum_over_time(slo:sli_error:ratio_rate5m{sloth_id=\"test-id\", sloth_service=\"test-svc\", sloth_slo=\"test-name\"}[30d])\n/ ignoring (sloth_window)\ncount_over_time(slo:sli_error:ratio_rate5m{sloth_id=\"test-id\", sloth_service=\"test-svc\", sloth_slo=\"test-name\"}[30d])\n",
+									Expr:   "sum_over_time(sum(slo:sli_error:ratio_rate5m{sloth_id=\"test-id\", sloth_service=\"test-svc\", sloth_slo=\"test-name\"})[30d:])\n/\ncount_over_time(sum(slo:sli_error:ratio_rate5m{sloth_id=\"test-id\", sloth_service=\"test-svc\", sloth_slo=\"test-name\"})[30d:])\n",
 									Labels: map[string]string{
 										"test_label":    "label_1",
 										"extra_k1":      "extra_v1",

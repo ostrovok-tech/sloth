@@ -127,9 +127,9 @@ groups:
       sloth_window: 3d
   - record: slo:sli_error:ratio_rate30d
     expr: |
-      sum_over_time(slo:sli_error:ratio_rate5m{sloth_id="home-wifi-wifi-client-satisfaction", sloth_service="home-wifi", sloth_slo="wifi-client-satisfaction"}[30d])
-      / ignoring (sloth_window)
-      count_over_time(slo:sli_error:ratio_rate5m{sloth_id="home-wifi-wifi-client-satisfaction", sloth_service="home-wifi", sloth_slo="wifi-client-satisfaction"}[30d])
+      sum_over_time(sum(slo:sli_error:ratio_rate5m{sloth_id="home-wifi-wifi-client-satisfaction", sloth_service="home-wifi", sloth_slo="wifi-client-satisfaction"})[30d:])
+      /
+      count_over_time(sum(slo:sli_error:ratio_rate5m{sloth_id="home-wifi-wifi-client-satisfaction", sloth_service="home-wifi", sloth_slo="wifi-client-satisfaction"})[30d:])
     labels:
       cluster: valhalla
       cmd: examplesgen.sh

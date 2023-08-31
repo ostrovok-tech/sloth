@@ -92,9 +92,9 @@ groups:
       sloth_window: 3d
   - record: slo:sli_error:ratio_rate30d
     expr: |
-      sum_over_time(slo:sli_error:ratio_rate5m{sloth_id="svc01-slo1", sloth_service="svc01", sloth_slo="slo1"}[30d])
-      / ignoring (sloth_window)
-      count_over_time(slo:sli_error:ratio_rate5m{sloth_id="svc01-slo1", sloth_service="svc01", sloth_slo="slo1"}[30d])
+      sum_over_time(sum(slo:sli_error:ratio_rate5m{sloth_id="svc01-slo1", sloth_service="svc01", sloth_slo="slo1"})[30d:])
+      /
+      count_over_time(sum(slo:sli_error:ratio_rate5m{sloth_id="svc01-slo1", sloth_service="svc01", sloth_slo="slo1"})[30d:])
     labels:
       global01k1: global01v1
       global02k1: global02v1
@@ -266,9 +266,9 @@ groups:
       sloth_window: 3d
   - record: slo:sli_error:ratio_rate30d
     expr: |
-      sum_over_time(slo:sli_error:ratio_rate5m{sloth_id="svc01-slo02", sloth_service="svc01", sloth_slo="slo02"}[30d])
-      / ignoring (sloth_window)
-      count_over_time(slo:sli_error:ratio_rate5m{sloth_id="svc01-slo02", sloth_service="svc01", sloth_slo="slo02"}[30d])
+      sum_over_time(sum(slo:sli_error:ratio_rate5m{sloth_id="svc01-slo02", sloth_service="svc01", sloth_slo="slo02"})[30d:])
+      /
+      count_over_time(sum(slo:sli_error:ratio_rate5m{sloth_id="svc01-slo02", sloth_service="svc01", sloth_slo="slo02"})[30d:])
     labels:
       global01k1: global01v1
       global03k1: global03v1

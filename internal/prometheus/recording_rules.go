@@ -153,9 +153,9 @@ func optimizedSLIRecordGenerator(slo SLO, window, shortWindow time.Duration) (*r
 	// that is 1 (thats why we can use `count`), giving use a correct ratio of ratios:
 	// - https://prometheus.io/docs/practices/rules/
 	// - https://math.stackexchange.com/questions/95909/why-is-an-average-of-an-average-usually-incorrect
-	const sliExprTplFmt = `sum_over_time({{.metric}}{{.filter}}[{{.window}}])
-/ ignoring ({{.windowKey}})
-count_over_time({{.metric}}{{.filter}}[{{.window}}])
+	const sliExprTplFmt = `sum_over_time(sum({{.metric}}{{.filter}})[{{.window}}:])
+/
+count_over_time(sum({{.metric}}{{.filter}})[{{.window}}:])
 `
 
 	if window == shortWindow {

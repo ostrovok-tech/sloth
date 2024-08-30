@@ -4,6 +4,9 @@
 ### Added
 - Support of prometheus expretions validation using [metricsql](https://github.com/VictoriaMetrics/metricsql) from VictoriaMetrics.
 
+### Changed
+- Update to Go 1.23.
+
 ## [v0.11.0] - 2022-10-22
 
 ### Changed

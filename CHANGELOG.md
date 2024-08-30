@@ -1,6 +1,8 @@
 # Changelog
 
-## [Unreleased]
+## [v0.12.0] - Unreleased
+### Added
+- Support of prometheus expretions validation using [metricsql](https://github.com/VictoriaMetrics/metricsql) from VictoriaMetrics.
 
 ## [v0.11.0] - 2022-10-22
 

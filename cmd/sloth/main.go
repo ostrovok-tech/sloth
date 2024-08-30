@@ -15,9 +15,11 @@ import (
 	loglogrus "github.com/slok/sloth/internal/log/logrus"
 )
 
+var version string = "0.12.0"
+
 // Run runs the main application.
 func Run(ctx context.Context, args []string, stdin io.Reader, stdout, stderr io.Writer) error {
-	app := kingpin.New("sloth", "Easy SLO generator.")
+	app := kingpin.New("sloth", "Easy SLO generator (v"+version+").")
 	app.DefaultEnvars()
 	config := commands.NewRootConfig(app)
 

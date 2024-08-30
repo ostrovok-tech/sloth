@@ -11,11 +11,15 @@
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
 
-# Vendor directory
-vendor/
+# Dependency directories (remove the comment below to include it)
+# vendor/
 
-# Test coverage.
+# compiled binary
+bin/*
+
+# test data
+test_data/*
 .test_coverage.txt
 
-# Binaries
-/bin
+# vim
+*.sw?

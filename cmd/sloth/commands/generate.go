@@ -39,12 +39,15 @@ type generateCommand struct {
 	sliPluginsPaths       []string
 	sloPeriodWindowsPath  string
 	sloPeriod             string
+	useVictoriaMetrics    bool
 }
 
 // NewGenerateCommand returns the generate command.
 func NewGenerateCommand(app *kingpin.Application) Command {
 	c := &generateCommand{extraLabels: map[string]string{}}
+
 	cmd := app.Command("generate", "Generates Prometheus SLOs.")
+
 	cmd.Flag("input", "SLO spec input file path or directory (if directory is used, slos will be discovered recursively and out must be a directory).").Short('i').StringVar(&c.slosInput)
 	cmd.Flag("out", "Generated rules output file path or directory. If `-` it will use stdout (if input is a directory this must be a directory).").Default("-").Short('o').StringVar(&c.slosOut)
 	cmd.Flag("fs-exclude", "Filter regex to ignore matched discovered SLO file paths (used with directory based input/output).").Short('e').StringVar(&c.slosExcludeRegex)
@@ -57,6 +60,8 @@ func NewGenerateCommand(app *kingpin.Application) Command {
 	cmd.Flag("slo-period-windows-path", "The directory path to custom SLO period windows catalog (replaces default ones).").StringVar(&c.sloPeriodWindowsPath)
 	cmd.Flag("default-slo-period", "The default SLO period windows to be used for the SLOs.").Default("30d").StringVar(&c.sloPeriod)
 	cmd.Flag("disable-optimized-rules", "If enabled it will disable optimized generated rules.").BoolVar(&c.disableOptimizedRules)
+
+	cmd.Flag("victoriametrics", "Use VictoriaMetrics parser for expressions validation.").Short('v').BoolVar(&c.useVictoriaMetrics)
 
 	return c
 }
@@ -244,6 +249,7 @@ func (g generateCommand) Run(ctx context.Context, config RootConfig) error {
 		disableRecordings:     g.disableRecordings,
 		disableAlerts:         g.disableAlerts,
 		disableOptimizedRules: g.disableOptimizedRules,
+		useVictoriaMetrics:    g.useVictoriaMetrics,
 		extraLabels:           g.extraLabels,
 	}
 
@@ -305,6 +311,7 @@ type generator struct {
 	disableAlerts         bool
 	disableOptimizedRules bool
 	extraLabels           map[string]string
+	useVictoriaMetrics    bool
 }
 
 // GeneratePrometheus generates the SLOs based on a raw regular Prometheus spec format input and outs a Prometheus raw yaml.
@@ -420,12 +427,21 @@ func (g generator) generateRules(ctx context.Context, info info.Info, slos prome
 		alertRuleGen = prometheus.SLOAlertRulesGenerator
 	}
 
+	// Choose Validator.
+	var validator prometheus.Validator
+	if g.useVictoriaMetrics {
+		validator.MetricsQL = true
+	} else {
+		validator.PromQL = true
+	}
+
 	// Generate.
 	controller, err := generate.NewService(generate.ServiceConfig{
 		AlertGenerator:              alert.NewGenerator(g.windowsRepo),
 		SLIRecordingRulesGenerator:  sliRuleGen,
 		MetaRecordingRulesGenerator: metaRuleGen,
 		SLOAlertRulesGenerator:      alertRuleGen,
+		Validator:                   validator,
 		Logger:                      g.logger,
 	})
 	if err != nil {

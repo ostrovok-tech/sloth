@@ -25,13 +25,13 @@ type SLOGroup struct {
 }
 
 // Validate validates the SLO.
-func (s SLOGroup) Validate() error {
+func (s SLOGroup) Validate(validator prometheus.Validator) error {
 	err := modelSpecValidate.Struct(s.K8sMeta)
 	if err != nil {
 		return err
 	}
 
-	err = s.SLOGroup.Validate()
+	err = s.SLOGroup.Validate(validator)
 	if err != nil {
 		return err
 	}

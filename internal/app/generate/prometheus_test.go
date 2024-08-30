@@ -16,6 +16,9 @@ import (
 )
 
 func TestIntegrationAppServiceGenerate(t *testing.T) {
+	var validator prometheus.Validator
+	validator.MetricsQL = true
+
 	tests := map[string]struct {
 		req     generate.Request
 		expResp generate.Response
@@ -403,6 +406,7 @@ or
 
 			svc, err := generate.NewService(generate.ServiceConfig{
 				AlertGenerator: alert.NewGenerator(windowsRepo),
+				Validator:      validator,
 			})
 			require.NoError(err)
 

@@ -74,6 +74,9 @@ func getGoodSLO(name string) prometheus.SLO {
 }
 
 func TestModelValidationSpec(t *testing.T) {
+	var validator prometheus.Validator
+	validator.PromQL = true
+
 	tests := map[string]struct {
 		slos          func() k8sprometheus.SLOGroup
 		expErrMessage string
@@ -124,7 +127,7 @@ func TestModelValidationSpec(t *testing.T) {
 			assert := assert.New(t)
 
 			slos := test.slos()
-			err := slos.Validate()
+			err := slos.Validate(validator)
 
 			if test.expErrMessage != "" {
 				assert.Error(err)

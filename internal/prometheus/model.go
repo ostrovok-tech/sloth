@@ -2,12 +2,14 @@ package prometheus
 
 import (
 	"bytes"
+	"errors"
 	"fmt"
 	"reflect"
 	"regexp"
 	"text/template"
 	"time"
 
+	"github.com/VictoriaMetrics/metricsql"
 	"github.com/go-playground/validator/v10"
 	prommodel "github.com/prometheus/common/model"
 	"github.com/prometheus/prometheus/model/rulefmt"
@@ -55,9 +57,21 @@ type SLOGroup struct {
 	SLOs []SLO `validate:"required,dive"`
 }
 
+// Validator knows which validator to use (promql, metricsql).
+type Validator struct {
+	PromQL    bool
+	MetricsQL bool
+}
+
 // Validate validates the SLO.
-func (s SLOGroup) Validate() error {
-	return modelSpecValidate.Struct(s)
+func (s SLOGroup) Validate(validator Validator) error {
+	if validator.PromQL {
+		return modelSpecValidatePromQL.Struct(s)
+	} else if validator.MetricsQL {
+		return modelSpecValidateMetricsQL.Struct(s)
+	}
+
+	return errors.New("no validator set for SLOGroup")
 }
 
 // GetSLIErrorMetric returns the SLI error metric.
@@ -75,11 +89,28 @@ func (s SLO) GetSLOIDPromLabels() map[string]string {
 	}
 }
 
-var modelSpecValidate = func() *validator.Validate {
+var modelSpecValidatePromQL = func() *validator.Validate {
 	v := validator.New()
 
 	// More information on prometheus validators logic: https://github.com/prometheus/prometheus/blob/df80dc4d3970121f2f76cba79050983ffb3cdbb0/pkg/rulefmt/rulefmt.go#L188-L208
-	mustRegisterValidation(v, "prom_expr", validatePromExpression)
+	mustRegisterValidation(v, "prom_expr", validatePromQLExpression)
+	mustRegisterValidation(v, "prom_label_key", validatePromLabelKey)
+	mustRegisterValidation(v, "prom_label_value", validatePromLabelValue)
+	mustRegisterValidation(v, "prom_annot_key", validatePromAnnotKey)
+	mustRegisterValidation(v, "name", validateName)
+	mustRegisterValidation(v, "required_if_enabled", validateRequiredEnabledAlertName)
+	mustRegisterValidation(v, "template_vars", validateTemplateVars)
+	v.RegisterStructValidation(validateOneSLI, SLI{})
+	v.RegisterStructValidation(validateSLOGroup, SLOGroup{})
+	v.RegisterStructValidation(validateSLIEvents, SLIEvents{})
+	return v
+}()
+
+var modelSpecValidateMetricsQL = func() *validator.Validate {
+	v := validator.New()
+
+	// More information on prometheus validators logic: https://github.com/prometheus/prometheus/blob/df80dc4d3970121f2f76cba79050983ffb3cdbb0/pkg/rulefmt/rulefmt.go#L188-L208
+	mustRegisterValidation(v, "prom_expr", validateMetricsQLExpression)
 	mustRegisterValidation(v, "prom_label_key", validatePromLabelKey)
 	mustRegisterValidation(v, "prom_label_value", validatePromLabelValue)
 	mustRegisterValidation(v, "prom_annot_key", validatePromAnnotKey)
@@ -137,9 +168,9 @@ var promExprTplAllowedFakeData = map[string]string{
 	"window": "1m",
 }
 
-// validatePromExpression implements validator.CustomTypeFunc by validating
+// validatePromQLExpression implements validator.CustomTypeFunc by validating
 // a prometheus expression.
-func validatePromExpression(fl validator.FieldLevel) bool {
+func validatePromQLExpression(fl validator.FieldLevel) bool {
 	expr, ok := fl.Field().Interface().(string)
 	if !ok {
 		return false
@@ -160,6 +191,32 @@ func validatePromExpression(fl validator.FieldLevel) bool {
 	}
 
 	_, err = promqlparser.ParseExpr(tplB.String())
+	return err == nil
+}
+
+// validatePromExpression implements validator.CustomTypeFunc by validating
+// a VictoriaMetrics expression.
+func validateMetricsQLExpression(fl validator.FieldLevel) bool {
+	expr, ok := fl.Field().Interface().(string)
+	if !ok {
+		return false
+	}
+
+	// The expressions set by users can have some allowed templated data
+	// we are rendering the expression with fake data so prometheus can
+	// have a final expr and check if is correct.
+	tpl, err := template.New("expr").Parse(expr)
+	if err != nil {
+		return false
+	}
+
+	var tplB bytes.Buffer
+	err = tpl.Execute(&tplB, promExprTplAllowedFakeData)
+	if err != nil {
+		return false
+	}
+
+	_, err = metricsql.Parse(tplB.String())
 	return err == nil
 }
 

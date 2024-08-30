@@ -18,6 +18,7 @@ type ServiceConfig struct {
 	SLIRecordingRulesGenerator  SLIRecordingRulesGenerator
 	MetaRecordingRulesGenerator MetadataRecordingRulesGenerator
 	SLOAlertRulesGenerator      SLOAlertRulesGenerator
+	Validator                   prometheus.Validator
 	Logger                      log.Logger
 }
 
@@ -72,6 +73,7 @@ type Service struct {
 	sliRecordRuleGen  SLIRecordingRulesGenerator
 	metaRecordRuleGen MetadataRecordingRulesGenerator
 	alertRuleGen      SLOAlertRulesGenerator
+	validator         prometheus.Validator
 	logger            log.Logger
 }
 
@@ -87,6 +89,7 @@ func NewService(config ServiceConfig) (*Service, error) {
 		sliRecordRuleGen:  config.SLIRecordingRulesGenerator,
 		metaRecordRuleGen: config.MetaRecordingRulesGenerator,
 		alertRuleGen:      config.SLOAlertRulesGenerator,
+		validator:         config.Validator,
 		logger:            config.Logger,
 	}, nil
 }
@@ -111,7 +114,7 @@ type Response struct {
 }
 
 func (s Service) Generate(ctx context.Context, r Request) (*Response, error) {
-	err := r.SLOGroup.Validate()
+	err := r.SLOGroup.Validate(s.validator)
 	if err != nil {
 		return nil, fmt.Errorf("invalid SLO group: %w", err)
 	}

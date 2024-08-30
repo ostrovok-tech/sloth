@@ -2,7 +2,7 @@
 
 ## [v0.12.0] - Unreleased
 ### Added
-- Support of prometheus expretions validation using [metricsql](https://github.com/VictoriaMetrics/metricsql) from VictoriaMetrics.
+- Support of prometheus expressions validation using [metricsql](https://github.com/VictoriaMetrics/metricsql) from VictoriaMetrics.
 
 ### Changed
 - Update to Go 1.23.

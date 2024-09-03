@@ -5,7 +5,9 @@
 - Support of prometheus expressions validation using [metricsql](https://github.com/VictoriaMetrics/metricsql) from VictoriaMetrics.
 
 ### Changed
-- Update to Go 1.23.
+- Update to **Go 1.23**.
+- `docker/dev/Dockerfile` Update **golangci** to **1.60.3**, **mokery** to **2.45.0**, **gomarkdoc** to **1.1.0**.
+- Retarget URLs and imports from [slok/sloth](https://github.com/slok/sloth/tree/main) to [ostrovok-tech/sloth](https://github.com/ostrovok-tech/sloth) repository.
 
 ## [v0.11.0] - 2022-10-22
 

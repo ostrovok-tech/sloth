@@ -77,7 +77,7 @@ jobs:
           go-version-file: go.mod
       - name: Execute tests
         env:
-          KIND_VERSION: v0.16.0
+          KIND_VERSION: v0.24.0
         run: |
           # Get dependencies.
           echo "Getting dependencies..."

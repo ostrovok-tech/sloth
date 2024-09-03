@@ -12,3 +12,28 @@ linters:
     - gofmt
     - depguard
     - godot
+
+linters-settings:
+  depguard:
+    rules:
+      main:
+        #list-mode: lax # allow unless explicitely denied
+        files:
+          - $all
+          - "!$test"
+        allow:
+          - $gostd
+          - github.com/OpenSLO/oslo
+          - github.com/VictoriaMetrics/metricsql
+          - github.com/go-playground/validator
+          - github.com/oklog/run
+          - github.com/ostrovok-tech
+          - github.com/prometheus
+          - github.com/sirupsen/logrus
+          - github.com/slok/reload
+          - github.com/spotahome/kooper
+          - github.com/traefik
+          - k8s.io/api/core/v1
+          - k8s.io/apimachinery
+          - k8s.io/client-go
+        deny: []

@@ -12,7 +12,7 @@ import (
 	openslov1alpha "github.com/OpenSLO/oslo/pkg/manifest/v1alpha"
 	"gopkg.in/yaml.v2"
 
-	"github.com/slok/sloth/internal/prometheus"
+	"github.com/ostrovok-tech/sloth/internal/prometheus"
 )
 
 type YAMLSpecLoader struct {

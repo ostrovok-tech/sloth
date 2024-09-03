@@ -5,8 +5,8 @@ package v1
 import (
 	"net/http"
 
-	v1 "github.com/slok/sloth/pkg/kubernetes/api/sloth/v1"
-	"github.com/slok/sloth/pkg/kubernetes/gen/clientset/versioned/scheme"
+	v1 "github.com/ostrovok-tech/sloth/pkg/kubernetes/api/sloth/v1"
+	"github.com/ostrovok-tech/sloth/pkg/kubernetes/gen/clientset/versioned/scheme"
 	rest "k8s.io/client-go/rest"
 )
 

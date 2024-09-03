@@ -10,7 +10,7 @@ set -o nounset
 # - GOARCH: Arch compiling target.
 # - GOARM: ARM version.
 
-version_path="github.com/slok/sloth/internal/info.Version"
+version_path="github.com/ostrovok-tech/sloth/internal/info.Version"
 src=./cmd/sloth
 out=./bin/sloth
 

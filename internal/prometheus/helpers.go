@@ -6,7 +6,7 @@ import (
 
 	prommodel "github.com/prometheus/common/model"
 
-	"github.com/slok/sloth/internal/alert"
+	"github.com/ostrovok-tech/sloth/internal/alert"
 )
 
 func mergeLabels(ms ...map[string]string) map[string]string {

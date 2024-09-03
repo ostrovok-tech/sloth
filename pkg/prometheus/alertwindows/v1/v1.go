@@ -2,7 +2,9 @@
 
 package v1
 
-import prometheusmodel "github.com/prometheus/common/model"
+import (
+	prometheusmodel "github.com/prometheus/common/model"
+)
 
 const Kind = "AlertWindows"
 const APIVersion = "sloth.slok.dev/v1"

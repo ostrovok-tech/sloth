@@ -10,8 +10,8 @@ import (
 
 	"github.com/prometheus/prometheus/model/rulefmt"
 
-	"github.com/slok/sloth/internal/alert"
-	"github.com/slok/sloth/internal/info"
+	"github.com/ostrovok-tech/sloth/internal/alert"
+	"github.com/ostrovok-tech/sloth/internal/info"
 )
 
 // sliRulesgenFunc knows how to generate an SLI recording rule for a specific time window.

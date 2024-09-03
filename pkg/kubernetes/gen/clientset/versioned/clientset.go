@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"net/http"
 
-	slothv1 "github.com/slok/sloth/pkg/kubernetes/gen/clientset/versioned/typed/sloth/v1"
+	slothv1 "github.com/ostrovok-tech/sloth/pkg/kubernetes/gen/clientset/versioned/typed/sloth/v1"
 	discovery "k8s.io/client-go/discovery"
 	rest "k8s.io/client-go/rest"
 	flowcontrol "k8s.io/client-go/util/flowcontrol"

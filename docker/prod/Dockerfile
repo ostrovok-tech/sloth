@@ -3,14 +3,14 @@ ARG ARCH
 
 FROM golang:1.23.0-alpine as build-stage
 
-LABEL org.opencontainers.image.source https://github.com/slok/sloth
+LABEL org.opencontainers.image.source https://github.com/ostrovok-tech/sloth
 
 RUN apk --no-cache add \
-    g++ \
-    git \
-    make \
-    curl \
-    bash
+ g++ \
+ git \
+ make \
+ curl \
+ bash
 
 # Required by the built script for setting verion and cross-compiling.
 ARG VERSION
@@ -22,7 +22,6 @@ ENV GOARCH=${ARCH}
 WORKDIR /src
 COPY . .
 RUN ./scripts/build/bin/build-raw.sh
-
 
 # Although we are on an specific architecture (normally linux/amd64) our go binary has been built for
 # ${ARCH} specific architecture.

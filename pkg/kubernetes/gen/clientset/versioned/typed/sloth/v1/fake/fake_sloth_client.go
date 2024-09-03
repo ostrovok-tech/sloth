@@ -3,7 +3,7 @@
 package fake
 
 import (
-	v1 "github.com/slok/sloth/pkg/kubernetes/gen/clientset/versioned/typed/sloth/v1"
+	v1 "github.com/ostrovok-tech/sloth/pkg/kubernetes/gen/clientset/versioned/typed/sloth/v1"
 	rest "k8s.io/client-go/rest"
 	testing "k8s.io/client-go/testing"
 )

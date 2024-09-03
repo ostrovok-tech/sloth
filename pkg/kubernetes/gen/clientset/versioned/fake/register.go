@@ -3,7 +3,7 @@
 package fake
 
 import (
-	slothv1 "github.com/slok/sloth/pkg/kubernetes/api/sloth/v1"
+	slothv1 "github.com/ostrovok-tech/sloth/pkg/kubernetes/api/sloth/v1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"

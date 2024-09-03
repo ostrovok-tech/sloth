@@ -5,7 +5,7 @@ import (
 
 	"github.com/sirupsen/logrus"
 
-	"github.com/slok/sloth/internal/log"
+	"github.com/ostrovok-tech/sloth/internal/log"
 )
 
 type logger struct {

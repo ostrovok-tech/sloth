@@ -12,9 +12,9 @@ import (
 	"github.com/stretchr/testify/require"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	slothv1 "github.com/slok/sloth/pkg/kubernetes/api/sloth/v1"
-	"github.com/slok/sloth/test/integration/k8scontroller"
-	"github.com/slok/sloth/test/integration/testutils"
+	slothv1 "github.com/ostrovok-tech/sloth/pkg/kubernetes/api/sloth/v1"
+	"github.com/ostrovok-tech/sloth/test/integration/k8scontroller"
+	"github.com/ostrovok-tech/sloth/test/integration/testutils"
 )
 
 // sanitizePrometheusRule will remove all the dynamic fields on a monitoringv1.PrometheusRule object

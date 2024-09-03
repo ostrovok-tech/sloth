@@ -1,4 +1,4 @@
-module github.com/slok/sloth
+module github.com/ostrovok-tech/sloth
 
 go 1.23
 

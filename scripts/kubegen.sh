@@ -6,7 +6,7 @@ set -o nounset
 IMAGE_CLI_GEN=quay.io/slok/kube-code-generator:v1.25.0
 IMAGE_CRD_GEN=quay.io/slok/kube-code-generator:v1.25.0
 ROOT_DIRECTORY=$(dirname "$(readlink -f "$0")")/../
-PROJECT_PACKAGE="github.com/slok/sloth"
+PROJECT_PACKAGE="github.com/ostrovok-tech/sloth"
 GEN_DIRECTORY="pkg/kubernetes/gen"
 
 echo "Cleaning gen directory"

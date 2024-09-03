@@ -1,4 +1,4 @@
-module github.com/slok/sloth/helm
+module github.com/ostrovok-tech/sloth/helm
 
 go 1.23
 

@@ -9,13 +9,11 @@ import (
 	"github.com/sirupsen/logrus"
 	"gopkg.in/alecthomas/kingpin.v2"
 
-	"github.com/slok/sloth/cmd/sloth/commands"
-	"github.com/slok/sloth/internal/info"
-	"github.com/slok/sloth/internal/log"
-	loglogrus "github.com/slok/sloth/internal/log/logrus"
+	"github.com/ostrovok-tech/sloth/cmd/sloth/commands"
+	"github.com/ostrovok-tech/sloth/internal/info"
+	"github.com/ostrovok-tech/sloth/internal/log"
+	loglogrus "github.com/ostrovok-tech/sloth/internal/log/logrus"
 )
-
-var version string = "0.12.0"
 
 // Run runs the main application.
 func Run(ctx context.Context, args []string, stdin io.Reader, stdout, stderr io.Writer) error {

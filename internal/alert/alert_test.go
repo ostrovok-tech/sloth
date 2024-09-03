@@ -10,7 +10,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/slok/sloth/internal/alert"
+	"github.com/ostrovok-tech/sloth/internal/alert"
 )
 
 func TestGenerateMWMBAlerts(t *testing.T) {

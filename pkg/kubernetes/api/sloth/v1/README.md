@@ -3,7 +3,7 @@
 # v1
 
 ```go
-import "github.com/slok/sloth/pkg/kubernetes/api/sloth/v1"
+import "github.com/ostrovok-tech/sloth/pkg/kubernetes/api/sloth/v1"
 ```
 
 ## Index

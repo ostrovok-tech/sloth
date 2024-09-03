@@ -5,7 +5,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/util/intstr"
 
-	slothv1 "github.com/slok/sloth/pkg/kubernetes/api/sloth/v1"
+	slothv1 "github.com/ostrovok-tech/sloth/pkg/kubernetes/api/sloth/v1"
 )
 
 func getPluginPrometheusServiceLevel() *slothv1.PrometheusServiceLevel {

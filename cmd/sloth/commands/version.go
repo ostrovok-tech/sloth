@@ -23,7 +23,7 @@ func (versionCommand) Name() string {
 	return "version"
 }
 
-func (versionCommand) Run(ctx context.Context, config RootConfig) error {
+func (versionCommand) Run(_ context.Context, config RootConfig) error {
 	fmt.Fprintf(config.Stdout, "%s\n", info.Version)
 	return nil
 }

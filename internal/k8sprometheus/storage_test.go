@@ -375,7 +375,7 @@ func TestPrometheusOperatorCRDRepo(t *testing.T) {
 		"Having 0 SLO rules should fail.": {
 			k8sMeta: k8sprometheus.K8sMeta{},
 			slos:    []k8sprometheus.StorageSLO{},
-			mock:    func(m *k8sprometheusmock.PrometheusRulesEnsurer) {},
+			mock:    func(_ *k8sprometheusmock.PrometheusRulesEnsurer) {},
 			expErr:  true,
 		},
 
@@ -384,7 +384,7 @@ func TestPrometheusOperatorCRDRepo(t *testing.T) {
 			slos: []k8sprometheus.StorageSLO{
 				{},
 			},
-			mock:   func(m *k8sprometheusmock.PrometheusRulesEnsurer) {},
+			mock:   func(_ *k8sprometheusmock.PrometheusRulesEnsurer) {},
 			expErr: true,
 		},
 

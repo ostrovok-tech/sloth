@@ -67,7 +67,7 @@ func (i IOWriterPrometheusOperatorYAMLRepo) StoreSLOs(ctx context.Context, kmeta
 	return nil
 }
 
-func mapModelToPrometheusOperator(ctx context.Context, kmeta K8sMeta, slos []StorageSLO) (*monitoringv1.PrometheusRule, error) {
+func mapModelToPrometheusOperator(_ context.Context, kmeta K8sMeta, slos []StorageSLO) (*monitoringv1.PrometheusRule, error) {
 	// Add extra labels.
 	labels := map[string]string{
 		"app.kubernetes.io/component":  "SLO",

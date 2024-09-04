@@ -39,7 +39,7 @@ var (
 	specTypeV1RegexAPIVersion = regexp.MustCompile(`(?m)^apiVersion: +['"]?sloth.slok.dev\/v1['"]? *$`)
 )
 
-func (y YAMLSpecLoader) IsSpecType(ctx context.Context, data []byte) bool {
+func (y YAMLSpecLoader) IsSpecType(_ context.Context, data []byte) bool {
 	return specTypeV1RegexKind.Match(data) && specTypeV1RegexAPIVersion.Match(data)
 }
 

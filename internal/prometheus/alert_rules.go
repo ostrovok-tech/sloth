@@ -22,7 +22,7 @@ type sloAlertRulesGenerator struct {
 // from an SLO.
 var SLOAlertRulesGenerator = sloAlertRulesGenerator{alertGenFunc: defaultSLOAlertGenerator}
 
-func (s sloAlertRulesGenerator) GenerateSLOAlertRules(ctx context.Context, slo SLO, alerts alert.MWMBAlertGroup) ([]rulefmt.Rule, error) {
+func (s sloAlertRulesGenerator) GenerateSLOAlertRules(_ context.Context, slo SLO, alerts alert.MWMBAlertGroup) ([]rulefmt.Rule, error) {
 	rules := []rulefmt.Rule{}
 
 	// Generate Page alerts.

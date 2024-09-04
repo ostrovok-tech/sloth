@@ -221,7 +221,7 @@ func (f *FSWindowsRepo) load(ctx context.Context, windowsFS fs.FS) error {
 	return nil
 }
 
-func (f *FSWindowsRepo) GetWindows(ctx context.Context, period time.Duration) (*Windows, error) {
+func (f *FSWindowsRepo) GetWindows(_ context.Context, period time.Duration) (*Windows, error) {
 	w, ok := f.windows[period]
 	if !ok {
 		return nil, fmt.Errorf("window period %s missing", period)
@@ -232,7 +232,7 @@ func (f *FSWindowsRepo) GetWindows(ctx context.Context, period time.Duration) (*
 
 type windowLoader struct{}
 
-func (l windowLoader) LoadWindow(ctx context.Context, data []byte) (*Windows, error) {
+func (l windowLoader) LoadWindow(_ context.Context, data []byte) (*Windows, error) {
 	if len(data) == 0 {
 		return nil, fmt.Errorf("spec is required")
 	}

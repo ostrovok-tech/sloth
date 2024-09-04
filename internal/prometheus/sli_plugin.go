@@ -27,7 +27,7 @@ type FileManager interface {
 
 type fileManager struct{}
 
-func (f fileManager) FindFiles(ctx context.Context, root string, matcher *regexp.Regexp) ([]string, error) {
+func (f fileManager) FindFiles(_ context.Context, root string, matcher *regexp.Regexp) ([]string, error) {
 	paths := []string{}
 	err := filepath.Walk(root, func(path string, info fs.FileInfo, err error) error {
 		if err != nil {
@@ -174,14 +174,14 @@ func (f *FileSLIPluginRepo) Reload(ctx context.Context) error {
 	return nil
 }
 
-func (f *FileSLIPluginRepo) ListSLIPlugins(ctx context.Context) (map[string]SLIPlugin, error) {
+func (f *FileSLIPluginRepo) ListSLIPlugins(_ context.Context) (map[string]SLIPlugin, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 
 	return f.plugins, nil
 }
 
-func (f *FileSLIPluginRepo) GetSLIPlugin(ctx context.Context, id string) (*SLIPlugin, error) {
+func (f *FileSLIPluginRepo) GetSLIPlugin(_ context.Context, id string) (*SLIPlugin, error) {
 	f.mu.RLock()
 	defer f.mu.RUnlock()
 

@@ -175,7 +175,7 @@ func (h handler) handlePrometheusServiceLevelV1(ctx context.Context, psl *slothv
 	return nil
 }
 
-func (h handler) ignoreHandlePrometheusServiceLevelV1(ctx context.Context, psl *slothv1.PrometheusServiceLevel) (reason string, ignore bool) {
+func (h handler) ignoreHandlePrometheusServiceLevelV1(_ context.Context, psl *slothv1.PrometheusServiceLevel) (reason string, ignore bool) {
 	// If the received object is being deleted, ignore.
 	deleteInProgress := !psl.DeletionTimestamp.IsZero()
 	if deleteInProgress {

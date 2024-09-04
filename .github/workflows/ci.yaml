@@ -11,7 +11,7 @@ jobs:
     container: golangci/golangci-lint:v1.60.3
     steps:
       - uses: actions/checkout@v4
-      - name: Remove .git directory
+      - name: 'Remove .git directory (fix for "error obtaining VCS status: exit status 128")'
         run: rm -fr ./.git
       - run: golangci-lint run -v
 

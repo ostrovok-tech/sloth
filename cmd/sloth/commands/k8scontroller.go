@@ -157,7 +157,7 @@ func (k kubeControllerCommand) Run(ctx context.Context, config RootConfig) error
 	// Run hot-reload.
 	{
 		// Set SLI plugin repository reloader.
-		reloadManager.Add(1000, reload.ReloaderFunc(func(ctx context.Context, id string) error {
+		reloadManager.Add(1000, reload.ReloaderFunc(func(ctx context.Context, _ string) error {
 			return pluginRepo.Reload(ctx)
 		}))
 
@@ -182,7 +182,7 @@ func (k kubeControllerCommand) Run(ctx context.Context, config RootConfig) error
 		signal.Notify(sigC, syscall.SIGTERM, syscall.SIGINT, syscall.SIGHUP)
 
 		// Add hot-reload notifier for SIGHUP.
-		reloadManager.On(reload.NotifierFunc(func(ctx context.Context) (string, error) {
+		reloadManager.On(reload.NotifierFunc(func(_ context.Context) (string, error) {
 			<-reloadC
 			logger.Infof("Hot-reload triggered from OS SIGHUP signal")
 			return "sighup", nil
@@ -218,7 +218,7 @@ func (k kubeControllerCommand) Run(ctx context.Context, config RootConfig) error
 	{
 		// Set reloader signaler.
 		hotReloadC := make(chan struct{})
-		reloadManager.On(reload.NotifierFunc(func(ctx context.Context) (string, error) {
+		reloadManager.On(reload.NotifierFunc(func(_ context.Context) (string, error) {
 			<-hotReloadC
 			logger.Infof("Hot-reload triggered from http webhook")
 			return "http", nil
@@ -376,7 +376,7 @@ type kubernetesService interface {
 	EnsurePrometheusServiceLevelStatus(ctx context.Context, slo *slothv1.PrometheusServiceLevel, err error) error
 }
 
-func (k kubeControllerCommand) newKubernetesService(ctx context.Context, config RootConfig) (kubernetesService, error) {
+func (k kubeControllerCommand) newKubernetesService(_ context.Context, config RootConfig) (kubernetesService, error) {
 	config.Logger.Infof("Loading Kubernetes configuration...")
 
 	// Fake mode.

@@ -13,7 +13,7 @@ import (
 
 type testMemPluginsRepo map[string]prometheus.SLIPlugin
 
-func (t testMemPluginsRepo) GetSLIPlugin(ctx context.Context, id string) (*prometheus.SLIPlugin, error) {
+func (t testMemPluginsRepo) GetSLIPlugin(_ context.Context, id string) (*prometheus.SLIPlugin, error) {
 	p, ok := t[id]
 	if !ok {
 		return nil, fmt.Errorf("unknown plugin")
@@ -90,7 +90,7 @@ slos:
 			plugins: map[string]prometheus.SLIPlugin{
 				"test_plugin": {
 					ID: "test_plugin",
-					Func: func(ctx context.Context, meta map[string]string, labels map[string]string, options map[string]string) (string, error) {
+					Func: func(_ context.Context, _ map[string]string, _ map[string]string, _ map[string]string) (string, error) {
 						return "", fmt.Errorf("something")
 					},
 				},
@@ -118,7 +118,7 @@ slos:
 			plugins: map[string]prometheus.SLIPlugin{
 				"test_plugin": {
 					ID: "test_plugin",
-					Func: func(ctx context.Context, meta map[string]string, labels map[string]string, options map[string]string) (string, error) {
+					Func: func(_ context.Context, meta map[string]string, labels map[string]string, options map[string]string) (string, error) {
 						return fmt.Sprintf(`plugin_raw_expr{service="%s",slo="%s",objective="%s",gk1="%s",k1="%s",k2="%s"}`,
 							meta["service"],
 							meta["slo"],

@@ -38,7 +38,7 @@ func splitYAML(data []byte) []string {
 	return nonEmptyData
 }
 
-func createPluginLoader(ctx context.Context, logger log.Logger, paths []string) (*prometheus.FileSLIPluginRepo, error) {
+func createPluginLoader(_ context.Context, logger log.Logger, paths []string) (*prometheus.FileSLIPluginRepo, error) {
 	config := prometheus.FileSLIPluginRepoConfig{
 		Paths:  paths,
 		Logger: logger,

@@ -21,7 +21,7 @@ sum(rate(integration_test{ {{.filter}}job="{{.job}}" }[{{"{{.window}}"}}]))`))
 
 var filterRegex = regexp.MustCompile(`([^=]+="[^=,"]+",)+`)
 
-func SLIPlugin(ctx context.Context, meta, labels, options map[string]string) (string, error) {
+func SLIPlugin(_ context.Context, _, labels, options map[string]string) (string, error) {
 	// Get job.
 	job, ok := options["job"]
 	if !ok {

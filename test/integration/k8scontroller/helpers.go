@@ -83,7 +83,7 @@ type KubeClients struct {
 }
 
 // NewKubernetesClients returns Kubernetes clients.
-func NewKubernetesClients(ctx context.Context, config Config) (*KubeClients, error) {
+func NewKubernetesClients(_ context.Context, config Config) (*KubeClients, error) {
 	kcfg, err := clientcmd.NewNonInteractiveDeferredLoadingClientConfig(
 		&clientcmd.ClientConfigLoadingRules{
 			ExplicitPath: config.KubeConfig,

@@ -112,12 +112,12 @@ func (d DryRunKubernetesService) WatchPrometheusServiceLevels(ctx context.Contex
 	return d.svc.WatchPrometheusServiceLevels(ctx, ns, opts)
 }
 
-func (d DryRunKubernetesService) EnsurePrometheusRule(ctx context.Context, pr *monitoringv1.PrometheusRule) error {
+func (d DryRunKubernetesService) EnsurePrometheusRule(_ context.Context, _ *monitoringv1.PrometheusRule) error {
 	d.logger.Infof("Dry run EnsurePrometheusRule")
 	return nil
 }
 
-func (d DryRunKubernetesService) EnsurePrometheusServiceLevelStatus(ctx context.Context, slo *slothv1.PrometheusServiceLevel, err error) error {
+func (d DryRunKubernetesService) EnsurePrometheusServiceLevelStatus(_ context.Context, _ *slothv1.PrometheusServiceLevel, _ error) error {
 	d.logger.Infof("Dry run EnsurePrometheusServiceLevelStatus")
 	return nil
 }

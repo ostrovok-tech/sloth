@@ -21,13 +21,13 @@ const Noop = noop(0)
 
 type noop int
 
-func (n noop) Infof(format string, args ...interface{})                         {}
-func (n noop) Warningf(format string, args ...interface{})                      {}
-func (n noop) Errorf(format string, args ...interface{})                        {}
-func (n noop) Debugf(format string, args ...interface{})                        {}
-func (n noop) WithValues(map[string]interface{}) Logger                         { return n }
-func (n noop) WithCtxValues(context.Context) Logger                             { return n }
-func (n noop) SetValuesOnCtx(parent context.Context, values Kv) context.Context { return parent }
+func (n noop) Infof(_ string, _ ...interface{})                            {}
+func (n noop) Warningf(_ string, _ ...interface{})                         {}
+func (n noop) Errorf(_ string, _ ...interface{})                           {}
+func (n noop) Debugf(_ string, _ ...interface{})                           {}
+func (n noop) WithValues(map[string]interface{}) Logger                    { return n }
+func (n noop) WithCtxValues(context.Context) Logger                        { return n }
+func (n noop) SetValuesOnCtx(parent context.Context, _ Kv) context.Context { return parent }
 
 type contextKey string
 

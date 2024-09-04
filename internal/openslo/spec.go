@@ -31,11 +31,11 @@ var (
 	specTypeV1AlphaRegexAPIVersion = regexp.MustCompile(`(?m)^apiVersion: +['"]?openslo\/v1alpha['"]? *$`)
 )
 
-func (y YAMLSpecLoader) IsSpecType(ctx context.Context, data []byte) bool {
+func (y YAMLSpecLoader) IsSpecType(_ context.Context, data []byte) bool {
 	return specTypeV1AlphaRegexKind.Match(data) && specTypeV1AlphaRegexAPIVersion.Match(data)
 }
 
-func (y YAMLSpecLoader) LoadSpec(ctx context.Context, data []byte) (*prometheus.SLOGroup, error) {
+func (y YAMLSpecLoader) LoadSpec(_ context.Context, data []byte) (*prometheus.SLOGroup, error) {
 	if len(data) == 0 {
 		return nil, fmt.Errorf("spec is required")
 	}
@@ -114,7 +114,7 @@ var errorRatioRawQueryTpl = template.Must(template.New("").Parse(`
 // however we will convert to a raw based sloth SLI because the ratio queries that we have differ from
 // Sloth. Sloth uses bad/total events, OpenSLO uses good/total events. We get the ratio using good events
 // and then rest to 1, to get a raw error ratio query.
-func (y YAMLSpecLoader) getSLI(spec openslov1alpha.SLOSpec, slo openslov1alpha.Objective) (*prometheus.SLI, error) {
+func (y YAMLSpecLoader) getSLI(_ openslov1alpha.SLOSpec, slo openslov1alpha.Objective) (*prometheus.SLI, error) {
 	if slo.RatioMetrics == nil {
 		return nil, fmt.Errorf("missing ratioMetrics")
 	}

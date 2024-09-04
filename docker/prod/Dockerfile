@@ -6,7 +6,7 @@ FROM golang:1.23.0-alpine as build-stage
 LABEL org.opencontainers.image.source https://github.com/ostrovok-tech/sloth
 
 # hadolint global ignore=DL3018
-RUN apk --no-cache add g++ git make curl bash
+RUN apk --no-cache add g++ git make curl bash tree
 
 # Required by the built script for setting verion and cross-compiling.
 ARG VERSION
@@ -17,6 +17,7 @@ ENV GOARCH=${ARCH}
 # Compile.
 WORKDIR /src
 COPY . .
+RUN tree
 RUN ./scripts/build/bin/build-raw.sh
 
 # Although we are on an specific architecture (normally linux/amd64) our go binary has been built for

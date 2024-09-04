@@ -66,78 +66,6 @@ jobs:
           echo "Executing integration tests..."
           make ci-integration-cli
 
-          #  integration-test-k8s:
-          #    name: Integration test Kubernetes
-          #    runs-on: ubuntu-latest
-          #    strategy:
-          #      matrix:
-          #        kubernetes: [1.21.14, 1.22.15, 1.23.12, 1.24.6, 1.25.2]
-          #    steps:
-          #      - uses: actions/checkout@v4
-          #      - uses: actions/setup-go@v5
-          #        with:
-          #          go-version-file: go.mod
-          #      - name: Execute tests
-          #        env:
-          #          KIND_VERSION: v0.24.0
-          #        run: |
-          #          # Get dependencies.
-          #          echo "Getting dependencies..."
-          #          curl -Lo kind https://github.com/kubernetes-sigs/kind/releases/download/${KIND_VERSION}/kind-linux-amd64 && chmod +x kind && sudo mv kind /usr/local/bin/
-          #          curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/v${{ matrix.kubernetes }}/bin/linux/amd64/kubectl && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
-          #
-          #          # Start cluster.
-          #          echo "Starting ${{ matrix.kubernetes }} Kubernetes cluster..."
-          #          kind create cluster --image kindest/node:v${{ matrix.kubernetes }}
-          #          kind get kubeconfig > /tmp/test.kubeconfig
-          #
-          #          # Register CRDs.
-          #          kubectl apply -f ./pkg/kubernetes/gen/crd/
-          #          kubectl apply -f ./test/integration/crd
-          #
-          #          # Build binary.
-          #          echo "Building binary..."
-          #          make ci-build
-          #          sudo mv ./bin/sloth /usr/local/bin/
-          #
-          #          # Execute integration tests.
-          #          echo "Executing integration tests..."
-          #          export SLOTH_INTEGRATION_KUBE_CONFIG=/tmp/test.kubeconfig
-          #          make ci-integration-k8s
-
-          #  rolling-release-images:
-          #    # Only on main branch.
-          #    if: startsWith(github.ref, 'refs/heads/main')
-          #    env:
-          #      TAG_IMAGE_LATEST: "true"
-          #      PROD_IMAGE_NAME: ghcr.io/${GITHUB_REPOSITORY}
-          #      VERSION: ${GITHUB_SHA}
-          #    needs: [check, unit-test, integration-test-cli, integration-test-k8s, helm-chart-test]
-          #    name: Release images
-          #    runs-on: ubuntu-latest
-          #    steps:
-          #      - uses: actions/checkout@v4
-          #      - name: Docker login
-          #        run: docker login ghcr.io -u ${{ github.actor }} -p "${{ secrets.GITHUB_TOKEN }}"
-          #      - name: Build and publish docker images
-          #        run: make build-publish-image-all
-
-          #  tagged-release-images:
-          #    # Only on tags.
-          #    if: startsWith(github.ref, 'refs/tags/')
-          #    env:
-          #      PROD_IMAGE_NAME: ghcr.io/${GITHUB_REPOSITORY}
-          #    needs: [check, unit-test, integration-test-cli, integration-test-k8s, helm-chart-test]
-          #    name: Tagged release images
-          #    runs-on: ubuntu-latest
-          #    steps:
-          #      - run: echo "VERSION=${GITHUB_REF#refs/*/}" >> ${GITHUB_ENV} # Sets VERSION env var.
-          #      - uses: actions/checkout@v4
-          #      - name: Docker login
-          #        run: docker login ghcr.io -u ${{ github.actor }} -p "${{ secrets.GITHUB_TOKEN }}"
-          #      - name: Build and publish docker images
-          #        run: make build-publish-image-all
-
   tagged-release-binaries:
     # Only on tags.
     if: startsWith(github.ref, 'refs/tags/')
@@ -161,3 +89,75 @@ jobs:
           file: "bin/*"
           tags: true
           draft: true
+
+  rolling-release-images:
+    env:
+      TAG_IMAGE_LATEST: "true"
+      PROD_IMAGE_NAME: ghcr.io/${GITHUB_REPOSITORY}
+      VERSION: dev
+    #needs: [check, unit-test, integration-test-cli, integration-test-k8s, helm-chart-test]
+    needs: [check, unit-test, integration-test-cli, helm-chart-test]
+    name: Release images
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Docker login
+        run: docker login ghcr.io -u ${{ github.actor }} -p "${{ secrets.GITHUB_TOKEN }}"
+      - name: Build and publish docker images
+        run: make build-publish-image-all
+
+#  integration-test-k8s:
+#    name: Integration test Kubernetes
+#    runs-on: ubuntu-latest
+#    strategy:
+#      matrix:
+#        kubernetes: [1.21.14, 1.22.15, 1.23.12, 1.24.6, 1.25.2]
+#    steps:
+#      - uses: actions/checkout@v4
+#      - uses: actions/setup-go@v5
+#        with:
+#          go-version-file: go.mod
+#      - name: Execute tests
+#        env:
+#          KIND_VERSION: v0.24.0
+#        run: |
+#          # Get dependencies.
+#          echo "Getting dependencies..."
+#          curl -Lo kind https://github.com/kubernetes-sigs/kind/releases/download/${KIND_VERSION}/kind-linux-amd64 && chmod +x kind && sudo mv kind /usr/local/bin/
+#          curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/v${{ matrix.kubernetes }}/bin/linux/amd64/kubectl && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
+#
+#          # Start cluster.
+#          echo "Starting ${{ matrix.kubernetes }} Kubernetes cluster..."
+#          kind create cluster --image kindest/node:v${{ matrix.kubernetes }}
+#          kind get kubeconfig > /tmp/test.kubeconfig
+#
+#          # Register CRDs.
+#          kubectl apply -f ./pkg/kubernetes/gen/crd/
+#          kubectl apply -f ./test/integration/crd
+#
+#          # Build binary.
+#          echo "Building binary..."
+#          make ci-build
+#          sudo mv ./bin/sloth /usr/local/bin/
+#
+#          # Execute integration tests.
+#          echo "Executing integration tests..."
+#          export SLOTH_INTEGRATION_KUBE_CONFIG=/tmp/test.kubeconfig
+#          make ci-integration-k8s
+
+
+#  tagged-release-images:
+#    # Only on tags.
+#    if: startsWith(github.ref, 'refs/tags/')
+#    env:
+#      PROD_IMAGE_NAME: ghcr.io/${GITHUB_REPOSITORY}
+#    needs: [check, unit-test, integration-test-cli, integration-test-k8s, helm-chart-test]
+#    name: Tagged release images
+#    runs-on: ubuntu-latest
+#    steps:
+#      - run: echo "VERSION=${GITHUB_REF#refs/*/}" >> ${GITHUB_ENV} # Sets VERSION env var.
+#      - uses: actions/checkout@v4
+#      - name: Docker login
+#        run: docker login ghcr.io -u ${{ github.actor }} -p "${{ secrets.GITHUB_TOKEN }}"
+#      - name: Build and publish docker images
+#        run: make build-publish-image-all

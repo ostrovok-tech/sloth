@@ -1,5 +1,5 @@
-# Set also `ARCH` ARG here so we can use it on all the `FROM`s. 
-ARG ARCH
+# Set also `ALPINE_ARCH` ARG here so we can use it on all the `FROM`s. 
+ARG ALPINE_ARCH
 
 FROM golang:1.23.0-alpine as build-stage
 
@@ -14,8 +14,6 @@ ENV VERSION=${VERSION}
 
 ARG ARCH
 ENV GOARCH=${ARCH}
-
-ARG ALPINE_ARCH
 
 # Compile.
 WORKDIR /src

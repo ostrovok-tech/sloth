@@ -13,6 +13,8 @@ ARCH=${ARCH:-$DEF_ARCH}
 IMAGE_TAG_ARCH="${IMAGE}:${VERSION}-${ARCH}"
 
 # Guess Alpine image arch. Take the same as $ARCH by default.
+ALPINE_ARCH="${ARCH}"
+
 case $ARCH in
 	arm64)
 		ALPINE_ARCH="arm64v8"
@@ -20,10 +22,6 @@ case $ARCH in
 
 	arm)
 		ALPINE_ARCH="arm32v7"
-		;;
-
-	*)
-		ALPINE_ARCH="${ARCH}"
 		;;
 esac
 

@@ -18,7 +18,6 @@ ENV GOARCH=${ARCH}
 # Compile.
 WORKDIR /src
 COPY . .
-RUN tree
 RUN ./scripts/build/bin/build-raw.sh
 
 # Although we are on an specific architecture (normally linux/amd64) our go binary has been built for

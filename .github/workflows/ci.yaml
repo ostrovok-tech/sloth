@@ -1,9 +1,7 @@
 ---
 name: CI
 
-on:
-  - push
-  - pull_request
+on: [push, pull_request]
 
 jobs:
   check:
@@ -51,10 +49,10 @@ jobs:
       - name: Execute Helm tests
         env:
           HELM_VERSION: v3.6.3
-        run:
-          - echo "Getting dependencies..."
-          - curl -L https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz | tar -xz && mv ./linux-amd64/helm /usr/local/bin &&  chmod +x /usr/local/bin/helm
-          - make ci-helm-test
+        run: |
+          echo "Getting dependencies..."
+          curl -L https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz | tar -xz && mv ./linux-amd64/helm /usr/local/bin &&  chmod +x /usr/local/bin/helm
+          make ci-helm-test
 
   integration-test-cli:
     name: Integration test CLI
@@ -95,10 +93,10 @@ jobs:
       - name: Build binaries
         env:
           VERSION: "${{ steps.extract_tag.outputs.tag }}"
-        run:
-          - mkdir -p ./bin
-          - chmod -R 0777 ./bin
-          - make build-all
+        run: |
+          mkdir -p ./bin
+          chmod -R 0777 ./bin
+          make build-all
 
       - name: Upload binaries
         uses: xresloader/upload-to-github-release@v1.6.0

@@ -1,6 +1,16 @@
 # Changelog
+All notable changes to this project will be documented in this file.
 
-## [v0.12.0] - Unreleased
+The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
+and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+
+## [0.12.0] - 2024-09-09
+**WARNING!**
+`integration-test-k8s` CI job is disabled because tests don't pass and I've failed to realise why it is so. We don't use Kubernetes related stuff for the time being, so I'm going to address this later in next releases.
+
+### Fixed
+- Recording rules generation after labels changes. Fix was cherry-picked from [kolonialno/sloth](https://github.com/kolonialno/sloth) fork.
+
 ### Added
 - Support of prometheus expressions validation using [metricsql](https://github.com/VictoriaMetrics/metricsql) from VictoriaMetrics.
 
@@ -8,6 +18,7 @@
 - Update to **Go 1.23**.
 - `docker/dev/Dockerfile` Update **golangci** to **1.60.3**, **mokery** to **2.45.0**, **gomarkdoc** to **1.1.0**.
 - Retarget URLs and imports from [slok/sloth](https://github.com/slok/sloth/tree/main) to [ostrovok-tech/sloth](https://github.com/ostrovok-tech/sloth) repository.
+- `CI` actions updated, docker build version changed.
 
 ## [v0.11.0] - 2022-10-22
 

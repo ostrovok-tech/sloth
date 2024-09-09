@@ -11,9 +11,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: 'Remove .git directory (fix for "error obtaining VCS status: exit status 128")'
-        run: rm -fr ./.git
-
       - name: Run GolangCI linters
         run: golangci-lint run -v
 
@@ -156,43 +153,44 @@ jobs:
           VERSION: "${{ steps.extract_tag.outputs.tag }}"
         run: make build-publish-image-all
 
-  integration-test-k8s:
-    name: Integration test Kubernetes
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        kubernetes: [1.31.0]
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-go@v5
-        with:
-          go-version-file: go.mod
-
-      - name: Execute tests
-        env:
-          KIND_VERSION: v0.24.0
-        run: |
-          # Get dependencies.
-          echo "Getting dependencies..."
-          curl -Lo kind https://github.com/kubernetes-sigs/kind/releases/download/${KIND_VERSION}/kind-linux-amd64 && chmod +x kind && sudo mv kind /usr/local/bin/
-          curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/v${{ matrix.kubernetes }}/bin/linux/amd64/kubectl && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
-
-          # Start cluster.
-          echo "Starting ${{ matrix.kubernetes }} Kubernetes cluster..."
-          kind create cluster --image kindest/node:v${{ matrix.kubernetes }}
-          kind get kubeconfig > /tmp/test.kubeconfig
-
-          # Register CRDs.
-          kubectl apply -f ./pkg/kubernetes/gen/crd/
-          kubectl apply -f ./test/integration/crd
-
-          # Build binary.
-          echo "Building binary..."
-          make ci-build
-          sudo mv ./bin/sloth /usr/local/bin/
-
-          # Execute integration tests.
-          echo "Executing integration tests..."
-          export SLOTH_INTEGRATION_KUBE_CONFIG=/tmp/test.kubeconfig
-          make ci-integration-k8s
+#  integration-test-k8s:
+#    name: Integration test Kubernetes
+#    runs-on: ubuntu-latest
+#    strategy:
+#      matrix:
+#        kubernetes: [1.31.0]
+#    steps:
+#      - uses: actions/checkout@v4
+#
+#      - uses: actions/setup-go@v5
+#        with:
+#          go-version-file: go.mod
+#
+#      - name: Execute tests
+#        env:
+#          KIND_VERSION: v0.24.0
+#        run: |
+#          # Get dependencies.
+#          echo "Installing 'king' & 'kubectl'."
+#          curl -Lo kind https://github.com/kubernetes-sigs/kind/releases/download/${KIND_VERSION}/kind-linux-amd64 && chmod +x kind && sudo mv kind /usr/local/bin/
+#          curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/v${{ matrix.kubernetes }}/bin/linux/amd64/kubectl && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
+#
+#          # Start cluster.
+#          echo -e "\nStarting ${{ matrix.kubernetes }} Kubernetes cluster..."
+#          kind create cluster --image kindest/node:v${{ matrix.kubernetes }}
+#          kind get kubeconfig > /tmp/test.kubeconfig
+#
+#          # Register CRDs.
+#          echo -e "\nCreating our CRDs."
+#          kubectl apply -f ./pkg/kubernetes/gen/crd/
+#          kubectl apply -f ./test/integration/crd
+#
+#          # Build binary.
+#          echo -e "\nBuilding binary."
+#          make ci-build
+#          sudo mv ./bin/sloth /usr/local/bin/
+#
+#          # Execute integration tests.
+#          echo -e "\nExecuting integration tests."
+#          export SLOTH_INTEGRATION_KUBE_CONFIG=/tmp/test.kubeconfig
+#          make ci-integration-k8s

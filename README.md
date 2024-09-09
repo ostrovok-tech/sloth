@@ -9,7 +9,13 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/ostrovok-tech/sloth)](https://goreportcard.com/report/github.com/ostrovok-tech/sloth)
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/ostrovok-tech/sloth)](https://github.com/ostrovok-tech/sloth/releases/latest)
 [![OpenSLO](https://img.shields.io/badge/OpenSLO-v1alpha-green?color=4974EA&style=flat)](https://github.com/OpenSLO/OpenSLO#slo)
-<-- ![Kubernetes release](https://img.shields.io/badge/Kubernetes-v1.25-green?logo=Kubernetes&style=flat&color=326CE5&logoColor=white) -->
+<!-- ![Kubernetes release](https://img.shields.io/badge/Kubernetes-v1.25-green?logo=Kubernetes&style=flat&color=326CE5&logoColor=white) -->
+
+## Warning
+This is a fork of [slok/sloth](https://github.com/slok/sloth) that we did as the origin's development was stopped two years ago, which was postulated at [Project State issue](https://github.com/slok/sloth/issues/521).
+We use **Sloth** for internal Service Level Objectives generation and we belive this is a handy tool but there are some issues to fix and features to add.  
+We are using and we are testing it in our environment, but please keep in mind, that something may work different due to dependencies update etc at yours. So be carefull in case you switch from stable original to this one.  
+You are welcome to create issues and pull requests if you want.
 
 ## Introduction
 

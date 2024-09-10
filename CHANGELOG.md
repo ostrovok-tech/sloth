@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 **WARNING!**
 `integration-test-k8s` CI job is disabled because tests don't pass and I've failed to realise why it is so. We don't use Kubernetes related stuff for the time being, so I'm going to address this later in next releases.
 
+### Regression
+- Probably generation from [Kebernetes spec](https://sloth.dev/specs/kubernetes/) won't work as expected.
+
 ### Fixed
 - Recording rules generation after labels changes. Fix was cherry-picked from [kolonialno/sloth](https://github.com/kolonialno/sloth) fork.
 

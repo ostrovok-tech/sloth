@@ -99,7 +99,7 @@ jobs:
           make build-all
 
       - name: Generate Changelog
-        run: "./scripts/read_changelog.sh ${{ steps.extract_tag.outputs.tag }} > ${{ github.workspace }}-CHANGELOG.txt"
+        run: "./scripts/read_changelog.sh ${{ steps.extract_tag.outputs.tag }} >> ${{ github.workspace }}-CHANGELOG.txt"
 
       - name: Release
         uses: softprops/action-gh-release@v2

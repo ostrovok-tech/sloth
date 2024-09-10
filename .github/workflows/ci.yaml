@@ -98,12 +98,15 @@ jobs:
           chmod -R 0777 ./bin
           make build-all
 
+      - name: Generate Changelog
+        run: ./scripts/read_changelog.sh > ${{ github.workspace }}-CHANGELOG.txt
+
       - name: Release
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: "bin/*"
-          body_path: CHANGELOG.md
+          body_path: ${{ github.workspace }}-CHANGELOG.txt
           make_latest: true
           fail_on_unmatched_files: true
 

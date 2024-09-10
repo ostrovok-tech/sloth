@@ -106,7 +106,7 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: "bin/*"
-          body_path: ${{ github.workspace }}-CHANGELOG.txt
+          body_path: "${{ github.workspace }}-CHANGELOG.txt"
           make_latest: true
           fail_on_unmatched_files: true
 

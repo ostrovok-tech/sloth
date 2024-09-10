@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.12.2] - 2024-09-10
+### Added
+- `./scripts/read_changelog.sh` a script to get tag's changes from CHANGELOG.
+
+### Changed
+- `CI` **tagged-release-binaries** job makes `softprops/action-gh-release@v2` action.
+
 ## [0.12.1] - 2024-09-10
 ### Fixed
 - `CI` do not run **rolling-release-images** job on tags.

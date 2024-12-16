@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.13.0] - 2024-12-16
+### Changed
+- Update dependencies versions.
+- `CI` do not build Docker images with branch names, use **development** tag for all builds w/o tag.
+
 ## [0.12.2] - 2024-09-10
 ### Added
 - `./scripts/read_changelog.sh` a script to get tag's changes from CHANGELOG.

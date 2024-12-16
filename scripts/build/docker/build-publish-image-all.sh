@@ -31,11 +31,11 @@ done
 docker manifest push "${IMAGE_TAG}"
 
 # Same as the regular virtual tag but for `:latest`.
-if [ ! -z "${TAG_IMAGE_LATEST:-}" ]; then
+if [ -n "${TAG_IMAGE_LATEST:-}" ]; then
     IMAGE_TAG_LATEST="${IMAGE}:latest"
 
     # Clean latest manifest in case there is one.
-    docker manifest rm ${IMAGE_TAG_LATEST} || true
+    docker manifest rm "${IMAGE_TAG_LATEST}" || true
 
     # Create manifest to join all arch images under one virtual tag.
     MANIFEST_LATEST="docker manifest create -a ${IMAGE_TAG_LATEST}"

@@ -114,6 +114,8 @@ jobs:
     if: ${{ ! startsWith(github.ref, 'refs/tags/') }}
     env:
       PROD_IMAGE_NAME: ghcr.io/${GITHUB_REPOSITORY}
+      REF_NAME: "${{ github.ref_name }}"
+      VERSION: "development"
     # needs: [check, unit-test, integration-test-cli, integration-test-k8s, helm-chart-test]
     needs: [check, unit-test, integration-test-cli, helm-chart-test]
     name: Release images
@@ -121,24 +123,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Extract branch name
-        shell: bash
-        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
-        id: extract_branch
-
       - name: Docker login
         run: docker login ghcr.io -u ${{ github.actor }} -p "${{ secrets.GITHUB_TOKEN }}"
 
       - name: Build and publish docker images
         run: make build-publish-image-all
-        env:
-          VERSION: "branch-${{ steps.extract_branch.outputs.branch }}"
 
   tagged-release-images:
     # Only on tags.
     if: startsWith(github.ref, 'refs/tags/')
     env:
       TAG_IMAGE_LATEST: "true"
+      REF_NAME: "${{ github.ref_name }}"
       PROD_IMAGE_NAME: ghcr.io/${GITHUB_REPOSITORY}
     # needs: [check, unit-test, integration-test-cli, integration-test-k8s, helm-chart-test]
     needs: [check, unit-test, integration-test-cli, helm-chart-test]

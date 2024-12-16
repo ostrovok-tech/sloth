@@ -3,10 +3,6 @@ ARG ALPINE_ARCH
 
 FROM golang:1.23.0-alpine as build-stage
 
-LABEL org.opencontainers.image.source "https://github.com/ostrovok-tech/sloth"
-LABEL org.opencontainers.image.description "Images of Sloth fork from https://github.com/ostrovok-tech/sloth"
-LABEL org.opencontainers.image.licenses "Apache-2.0"
-
 # hadolint global ignore=DL3018
 RUN apk --no-cache add g++ git make curl bash tree
 
@@ -27,6 +23,13 @@ RUN ./scripts/build/bin/build-raw.sh
 # To make portable our building process we base our final image on that same architecture as the binary 
 # to obtain a resulting ${ARCH} image independently where we are building this image.
 FROM ${ALPINE_ARCH}/alpine:3.14
+
+ARG REF_NAME
+
+LABEL org.opencontainers.image.source="https://github.com/ostrovok-tech/sloth"
+LABEL org.opencontainers.image.description="Images of Sloth fork from https://github.com/ostrovok-tech/sloth"
+LABEL org.opencontainers.image.licenses="Apache-2.0"
+LABEL org.opencontainers.image.ref.name="${REF_NAME}"
 
 COPY --from=build-stage /src/bin/sloth /usr/local/bin/sloth
 

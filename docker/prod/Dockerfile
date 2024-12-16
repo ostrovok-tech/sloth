@@ -26,7 +26,7 @@ RUN ./scripts/build/bin/build-raw.sh
 # ${ARCH} specific architecture.
 # To make portable our building process we base our final image on that same architecture as the binary 
 # to obtain a resulting ${ARCH} image independently where we are building this image.
-FROM ${ALPINE_ARCH}/alpine:3
+FROM ${ALPINE_ARCH}/alpine:3.14
 
 COPY --from=build-stage /src/bin/sloth /usr/local/bin/sloth
 

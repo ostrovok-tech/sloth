@@ -33,3 +33,4 @@ docker build \
 	--build-arg ALPINE_ARCH="${ALPINE_ARCH}" \
 	-t "${IMAGE_TAG_ARCH}" \
 	-f "${DOCKER_FILE_PATH}" .
+#   --platform "${ARCH}" \

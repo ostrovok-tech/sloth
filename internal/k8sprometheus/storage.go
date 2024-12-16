@@ -133,12 +133,16 @@ func promRulesToKubeRules(rules []rulefmt.Rule) []monitoringv1.Rule {
 		if r.For != 0 {
 			forS = r.For.String()
 		}
-
+		duration := monitoringv1.Duration(forS)
+		durationPointer := &duration
+		if duration == "" {
+			durationPointer = nil
+		}
 		res = append(res, monitoringv1.Rule{
 			Record:      r.Record,
 			Alert:       r.Alert,
 			Expr:        intstr.FromString(r.Expr),
-			For:         monitoringv1.Duration(forS),
+			For:         durationPointer,
 			Labels:      r.Labels,
 			Annotations: r.Annotations,
 		})

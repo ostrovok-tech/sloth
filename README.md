@@ -3,7 +3,6 @@
 </p>
 
 # Sloth
-
 [![Apache 2 licensed](https://img.shields.io/badge/license-Apache2-blue.svg)](https://raw.githubusercontent.com/ostrovok-tech/sloth/main/LICENSE)
 [![CI](https://github.com/ostrovok-tech/sloth/actions/workflows/ci.yaml/badge.svg?branch=main)](https://github.com/ostrovok-tech/sloth/actions/workflows/ci.yaml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/ostrovok-tech/sloth)](https://goreportcard.com/report/github.com/ostrovok-tech/sloth)

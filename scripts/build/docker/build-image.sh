@@ -8,7 +8,10 @@ set -e
 
 # By default use amd64 architecture.
 DEF_ARCH=amd64
+DEF_REF_NAME="development"
+
 ARCH=${ARCH:-$DEF_ARCH}
+REF_NAME=${REF_NAME:-$DEF_REF_NAME}
 
 IMAGE_TAG_ARCH="${IMAGE}:${VERSION}-${ARCH}"
 
@@ -31,6 +34,6 @@ docker build \
 	--build-arg VERSION="${VERSION}" \
 	--build-arg ARCH="${ARCH}" \
 	--build-arg ALPINE_ARCH="${ALPINE_ARCH}" \
+	--build-arg REF_NAME="${REF_NAME}" \
 	-t "${IMAGE_TAG_ARCH}" \
 	-f "${DOCKER_FILE_PATH}" .
-#   --platform "${ARCH}" \

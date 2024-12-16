@@ -114,8 +114,8 @@ jobs:
     if: ${{ ! startsWith(github.ref, 'refs/tags/') }}
     env:
       PROD_IMAGE_NAME: ghcr.io/${GITHUB_REPOSITORY}
-      BRANCH_NAME: "${{ github.head_ref || github.ref_name }}"
-      VERSION: "branch-${BRANCH_NAME}"
+      REF_NAME: "${GITHUB_REF_NAME}"
+      VERSION: "development"
     # needs: [check, unit-test, integration-test-cli, integration-test-k8s, helm-chart-test]
     needs: [check, unit-test, integration-test-cli, helm-chart-test]
     name: Release images
@@ -134,6 +134,7 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/')
     env:
       TAG_IMAGE_LATEST: "true"
+      REF_NAME: "${GITHUB_REF_NAME}"
       PROD_IMAGE_NAME: ghcr.io/${GITHUB_REPOSITORY}
     # needs: [check, unit-test, integration-test-cli, integration-test-k8s, helm-chart-test]
     needs: [check, unit-test, integration-test-cli, helm-chart-test]

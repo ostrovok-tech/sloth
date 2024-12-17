@@ -1,6 +1,7 @@
 package prometheus_test
 
 import (
+	"fmt"
 	"testing"
 	"time"
 
@@ -452,7 +453,7 @@ func TestModelValidationSpec(t *testing.T) {
 	validator.PromQL = false
 	validator.MetricsQL = true
 	for name, test := range tests {
-		t.Run(name, func(t *testing.T) {
+		t.Run(fmt.Sprintf("[MetricsQL] %s", name), func(t *testing.T) {
 			assert := assert.New(t)
 
 			slo := test.slo()
@@ -470,7 +471,7 @@ func TestModelValidationSpec(t *testing.T) {
 	validator.PromQL = true
 	validator.MetricsQL = false
 	for name, test := range tests {
-		t.Run(name, func(t *testing.T) {
+		t.Run(fmt.Sprintf("[PromQL] %s", name), func(t *testing.T) {
 			assert := assert.New(t)
 
 			slo := test.slo()

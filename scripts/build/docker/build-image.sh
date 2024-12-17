@@ -37,3 +37,4 @@ docker build \
 	--build-arg REF_NAME="${REF_NAME}" \
 	-t "${IMAGE_TAG_ARCH}" \
 	-f "${DOCKER_FILE_PATH}" .
+#   --platform "${ARCH}" \

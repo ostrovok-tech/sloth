@@ -2,7 +2,6 @@ package prometheus
 
 import (
 	"bytes"
-	"errors"
 	"fmt"
 	"reflect"
 	"regexp"
@@ -67,11 +66,8 @@ type Validator struct {
 func (s SLOGroup) Validate(validator Validator) error {
 	if validator.PromQL {
 		return modelSpecValidatePromQL.Struct(s)
-	} else if validator.MetricsQL {
-		return modelSpecValidateMetricsQL.Struct(s)
 	}
-
-	return errors.New("no validator set for SLOGroup")
+	return modelSpecValidateMetricsQL.Struct(s)
 }
 
 // GetSLIErrorMetric returns the SLI error metric.

@@ -69,6 +69,7 @@ type kubeControllerCommand struct {
 	sloPeriodWindowsPath  string
 	sloPeriod             string
 	disableOptimizedRules bool
+	useVictoriaMetrics    bool
 }
 
 // NewKubeControllerCommand returns the Kubernetes controller command.
@@ -96,6 +97,8 @@ func NewKubeControllerCommand(app *kingpin.Application) Command {
 	cmd.Flag("slo-period-windows-path", "The directory path to custom SLO period windows catalog (replaces default ones).").StringVar(&c.sloPeriodWindowsPath)
 	cmd.Flag("default-slo-period", "The default SLO period windows to be used for the SLOs.").Default("30d").StringVar(&c.sloPeriod)
 	cmd.Flag("disable-optimized-rules", "If enabled it will disable optimized generated rules.").BoolVar(&c.disableOptimizedRules)
+
+	cmd.Flag("victoriametrics", "Use VictoriaMetrics parser for expressions validation.").Short('v').BoolVar(&c.useVictoriaMetrics)
 
 	return c
 }
@@ -304,12 +307,21 @@ func (k kubeControllerCommand) Run(ctx context.Context, config RootConfig) error
 			sliRuleGen = prometheus.SLIRecordingRulesGenerator
 		}
 
+		// Choose Validator.
+		var validator prometheus.Validator
+		if k.useVictoriaMetrics {
+			validator.MetricsQL = true
+		} else {
+			validator.PromQL = true
+		}
+
 		// Create the generate app service (the one that the CLIs use).
 		generator, err := generate.NewService(generate.ServiceConfig{
 			AlertGenerator:              alert.NewGenerator(windowsRepo),
 			SLIRecordingRulesGenerator:  sliRuleGen,
 			MetaRecordingRulesGenerator: prometheus.MetadataRecordingRulesGenerator,
 			SLOAlertRulesGenerator:      prometheus.SLOAlertRulesGenerator,
+			Validator:                   validator,
 			Logger:                      generatorLogger{Logger: logger},
 		})
 		if err != nil {

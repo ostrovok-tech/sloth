@@ -202,7 +202,46 @@ func TestKubernetesControllerPromOperatorGenerate(t *testing.T) {
 
 	for name, test := range tests {
 		test := test
-		t.Run(name, func(t *testing.T) {
+		t.Run(fmt.Sprintf("[MetricsQL] %s", name), func(t *testing.T) {
+			t.Parallel()
+			require := require.New(t)
+
+			// Create a context with cancel so we can stop everything at the end of the test.
+			ctx, cancel := context.WithCancel(context.Background())
+			defer cancel()
+
+			// Create NS and delete on test end.
+			ns, deleteNS, err := k8scontroller.NewKubernetesNamespace(ctx, kubeClis.Std)
+			require.NoError(err)
+			defer func() {
+				err := deleteNS(ctx)
+				require.NoError(err)
+			}()
+
+			// Run controller in background.
+			go func() {
+				// Prepare args.
+				args := []string{
+					"--metrics-listen-addr=:0",
+					"--hot-reload-addr=:0",
+					"--sli-plugins-path=./",
+					fmt.Sprintf("--namespace=%s", ns),
+					fmt.Sprintf("--default-slo-period=%s", test.sloPeriod),
+					"--victoriametrics",
+				}
+				if test.customSLOPeriods {
+					args = append(args, "--slo-period-windows-path=./windows")
+				}
+
+				// Listen on `:0` and isolate per namespace so we can run in tests parallel safely.
+				_, _, _ = k8scontroller.RunSlothController(ctx, config, ns, strings.Join(args, " "))
+			}()
+
+			// Execute test.
+			test.exec(ctx, t, ns, kubeClis)
+		})
+
+		t.Run(fmt.Sprintf("[PromQL] %s", name), func(t *testing.T) {
 			t.Parallel()
 			require := require.New(t)
 

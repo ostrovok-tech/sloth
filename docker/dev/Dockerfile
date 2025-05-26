@@ -1,4 +1,4 @@
-FROM golang:1.23.0
+FROM golang:1.24.1
 
 LABEL org.opencontainers.image.source https://github.com/ostrovok-tech/sloth
 

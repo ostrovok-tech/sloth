@@ -1,7 +1,7 @@
 # Set also `ALPINE_ARCH` ARG here so we can use it on all the `FROM`s. 
 ARG ALPINE_ARCH
 
-FROM golang:1.23.0-alpine as build-stage
+FROM golang:1.24.1-alpine as build-stage
 
 # hadolint global ignore=DL3018
 RUN apk --no-cache add g++ git make curl bash tree

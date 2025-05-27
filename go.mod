@@ -1,6 +1,7 @@
 module github.com/ostrovok-tech/sloth
 
-go 1.23
+go 1.24.1
+
 require (
 	github.com/OpenSLO/oslo v0.12.0
 	github.com/VictoriaMetrics/metricsql v0.81.1

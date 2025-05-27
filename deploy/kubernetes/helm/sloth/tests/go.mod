@@ -1,6 +1,7 @@
 module github.com/ostrovok-tech/sloth/helm
 
-go 1.23
+go 1.24.1
+
 require (
 	github.com/slok/go-helm-template v0.3.0
 	github.com/stretchr/testify v1.9.0

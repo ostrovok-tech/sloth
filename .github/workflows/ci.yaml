@@ -110,24 +110,24 @@ jobs:
           make_latest: true
           fail_on_unmatched_files: true
 
-  rolling-release-images:
-    if: ${{ ! startsWith(github.ref, 'refs/tags/') }}
-    env:
-      PROD_IMAGE_NAME: ghcr.io/${GITHUB_REPOSITORY}
-      REF_NAME: "${{ github.ref_name }}"
-      VERSION: "development"
-    # needs: [check, unit-test, integration-test-cli, integration-test-k8s, helm-chart-test]
-    needs: [check, unit-test, integration-test-cli, helm-chart-test]
-    name: Release images
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Docker login
-        run: docker login ghcr.io -u ${{ github.actor }} -p "${{ secrets.GITHUB_TOKEN }}"
-
-      - name: Build and publish docker images
-        run: make build-publish-image-all
+#  rolling-release-images:
+#    if: ${{ ! startsWith(github.ref, 'refs/tags/') }}
+#    env:
+#      PROD_IMAGE_NAME: ghcr.io/${GITHUB_REPOSITORY}
+#      REF_NAME: "${{ github.ref_name }}"
+#      VERSION: "development"
+#    # needs: [check, unit-test, integration-test-cli, integration-test-k8s, helm-chart-test]
+#    needs: [check, unit-test, integration-test-cli, helm-chart-test]
+#    name: Release images
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v4
+#
+#      - name: Docker login
+#        run: docker login ghcr.io -u ${{ github.actor }} -p "${{ secrets.GITHUB_TOKEN }}"
+#
+#      - name: Build and publish docker images
+#        run: make build-publish-image-all
 
   tagged-release-images:
     # Only on tags.

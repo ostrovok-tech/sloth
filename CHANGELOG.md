@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.15.0] - 2025-05-29
+### Changed
+- Update to **Go 1.24.1**.
+- `.golangci.yml` add `gopkg.in/yaml.v2` and `gopkg.in/alecthomas/kingpin.v2` in the whitelist
+- `docker/dev/Dockerfile` update **golang** to **1.24.1**
+- `docker/prod/Dockerfile` update **golang** to **1.24.1-alpine**
+- `CI` update **golangci/golangci-lint** to **v1.64.8**
+- `CI` disable `rolling-release-images` stage.
+- Update dependencies versions a bit further.
+
 ## [0.14.0] - 2024-12-17
 ### Fixed
 - `CI` integration tests for k8s.

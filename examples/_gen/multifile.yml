@@ -225,6 +225,8 @@ groups:
       summary: High error rate on 'myservice' requests responses
       title: (page) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget
         burn rate is too fast.
+      description: (page) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget
+        burn rate is too fast.
   - alert: MyServiceHighErrorRate
     expr: |
       (
@@ -246,6 +248,8 @@ groups:
     annotations:
       summary: High error rate on 'myservice' requests responses
       title: (ticket) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget
+        burn rate is too fast.
+      description: (page) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget
         burn rate is too fast.
 
 ---
@@ -474,6 +478,8 @@ groups:
       summary: High error rate on 'myservice' requests responses
       title: (page) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget
         burn rate is too fast.
+      description: (page) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget
+        burn rate is too fast.
   - alert: MyServiceHighErrorRate
     expr: |
       (
@@ -495,4 +501,6 @@ groups:
     annotations:
       summary: High error rate on 'myservice' requests responses
       title: (ticket) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget
+        burn rate is too fast.
+      description: (ticket) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget
         burn rate is too fast.

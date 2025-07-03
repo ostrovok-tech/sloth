@@ -190,6 +190,8 @@ spec:
           burn rate is over expected.'
         title: (page) {{"{{$labels.sloth_service}}"}} {{"{{$labels.sloth_slo}}"}} SLO error budget
           burn rate is too fast.
+        description: (page) {{"{{$labels.sloth_service}}"}} {{"{{$labels.sloth_slo}}"}} SLO error budget
+          burn rate is too fast.
       expr: |
         (
             max(slo:sli_error:ratio_rate5m{sloth_id="svc01-slo1", sloth_service="svc01", sloth_slo="slo1"} > (14.4 * 0.0009999999999999432)) without (sloth_window)
@@ -212,6 +214,8 @@ spec:
         summary: '{{"{{$labels.sloth_service}}"}} {{"{{$labels.sloth_slo}}"}} SLO error budget
           burn rate is over expected.'
         title: (ticket) {{"{{$labels.sloth_service}}"}} {{"{{$labels.sloth_slo}}"}} SLO error
+          budget burn rate is too fast.
+        description: (ticket) {{"{{$labels.sloth_service}}"}} {{"{{$labels.sloth_slo}}"}} SLO error
           budget burn rate is too fast.
       expr: |
         (

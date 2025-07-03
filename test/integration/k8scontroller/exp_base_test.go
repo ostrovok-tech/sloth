@@ -281,9 +281,10 @@ func getBasePromOpPrometheusRule(slothVersion string) *monitoringv1.PrometheusRu
 								"sloth_severity": "page",
 							},
 							Annotations: map[string]string{
-								"alert02k1": "alert02v1",
-								"summary":   "{{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget burn rate is over expected.",
-								"title":     "(page) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget burn rate is too fast.",
+								"alert02k1":   "alert02v1",
+								"summary":     "{{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget burn rate is over expected.",
+								"title":       "(page) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget burn rate is too fast.",
+								"description": "(page) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget burn rate is too fast.",
 							},
 						},
 						{
@@ -294,9 +295,10 @@ func getBasePromOpPrometheusRule(slothVersion string) *monitoringv1.PrometheusRu
 								"sloth_severity": "ticket",
 							},
 							Annotations: map[string]string{
-								"alert02k1": "alert02v1",
-								"summary":   "{{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget burn rate is over expected.",
-								"title":     "(ticket) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget burn rate is too fast.",
+								"alert02k1":   "alert02v1",
+								"summary":     "{{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget burn rate is over expected.",
+								"title":       "(ticket) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget burn rate is too fast.",
+								"description": "(ticket) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget burn rate is too fast.",
 							},
 						},
 					},

@@ -4,13 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.16.0] - 2025-07-04
+### Added
+- `./internal/prometheus/alert_rules.go` add `description` field to `extraAnnotations` map.
+- `./examples/_gen/*.yml`, `./internal/app/generate/prometheus_test.go`, `./internal/prometheus/alert_rules_test.go`, `./test/integration/*` configure tests, templates and examples with new `description` field.
+
 ## [0.15.0] - 2025-05-29
 ### Changed
 - Update to **Go 1.24.1**.
-- `.golangci.yml` add `gopkg.in/yaml.v2` and `gopkg.in/alecthomas/kingpin.v2` in the whitelist
-- `docker/dev/Dockerfile` update **golang** to **1.24.1**
-- `docker/prod/Dockerfile` update **golang** to **1.24.1-alpine**
-- `CI` update **golangci/golangci-lint** to **v1.64.8**
+- `.golangci.yml` add `gopkg.in/yaml.v2` and `gopkg.in/alecthomas/kingpin.v2` in the whitelist.
+- `docker/dev/Dockerfile` update **golang** to **1.24.1**.
+- `docker/prod/Dockerfile` update **golang** to **1.24.1-alpine**.
+- `CI` update **golangci/golangci-lint** to **v1.64.8**.
 - `CI` disable `rolling-release-images` stage.
 - Update dependencies versions a bit further.
 

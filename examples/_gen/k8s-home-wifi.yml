@@ -222,6 +222,8 @@ spec:
           burn rate is over expected.'
         title: (page) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget
           burn rate is too fast.
+        description: (page) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget
+          burn rate is too fast.
       expr: |
         (
             max(slo:sli_error:ratio_rate5m{sloth_id="home-wifi-good-wifi-client-satisfaction", sloth_service="home-wifi", sloth_slo="good-wifi-client-satisfaction"} > (14.4 * 0.05)) without (sloth_window)
@@ -242,6 +244,8 @@ spec:
         summary: '{{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget
           burn rate is over expected.'
         title: (ticket) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error
+          budget burn rate is too fast.
+        description: (ticket) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error
           budget burn rate is too fast.
       expr: |
         (
@@ -463,6 +467,8 @@ spec:
           burn rate is over expected.'
         title: (page) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget
           burn rate is too fast.
+        description: (page) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget
+          burn rate is too fast.
       expr: |
         (
             max(slo:sli_error:ratio_rate5m{sloth_id="home-wifi-risk-wifi-client-satisfaction", sloth_service="home-wifi", sloth_slo="risk-wifi-client-satisfaction"} > (14.4 * 0.0009999999999999432)) without (sloth_window)
@@ -483,6 +489,8 @@ spec:
         summary: '{{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget
           burn rate is over expected.'
         title: (ticket) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error
+          budget burn rate is too fast.
+        description: (ticket) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error
           budget burn rate is too fast.
       expr: |
         (

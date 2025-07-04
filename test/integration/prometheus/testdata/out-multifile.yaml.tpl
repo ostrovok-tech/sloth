@@ -192,6 +192,8 @@ groups:
       sloth_severity: page
     annotations:
       alert02k1: alert02k2
+      description: (page) {{"{{$labels.sloth_service}}"}} {{"{{$labels.sloth_slo}}"}} SLO error
+        budget burn rate is too fast.
       summary: '{{"{{$labels.sloth_service}}"}} {{"{{$labels.sloth_slo}}"}} SLO error budget burn
         rate is over expected.'
       title: (page) {{"{{$labels.sloth_service}}"}} {{"{{$labels.sloth_slo}}"}} SLO error budget
@@ -215,6 +217,8 @@ groups:
       sloth_severity: ticket
     annotations:
       alert02k1: alert02k2
+      description: (ticket) {{"{{$labels.sloth_service}}"}} {{"{{$labels.sloth_slo}}"}} SLO error
+        budget burn rate is too fast.
       summary: '{{"{{$labels.sloth_service}}"}} {{"{{$labels.sloth_slo}}"}} SLO error budget burn
         rate is over expected.'
       title: (ticket) {{"{{$labels.sloth_service}}"}} {{"{{$labels.sloth_slo}}"}} SLO error budget
@@ -587,6 +591,8 @@ groups:
       sloth_severity: page
     annotations:
       alert02k1: alert02k2
+      description: (page) {{"{{$labels.sloth_service}}"}} {{"{{$labels.sloth_slo}}"}} SLO error
+        budget burn rate is too fast.
       summary: '{{"{{$labels.sloth_service}}"}} {{"{{$labels.sloth_slo}}"}} SLO error budget burn
         rate is over expected.'
       title: (page) {{"{{$labels.sloth_service}}"}} {{"{{$labels.sloth_slo}}"}} SLO error budget
@@ -610,6 +616,8 @@ groups:
       sloth_severity: ticket
     annotations:
       alert02k1: alert02k2
+      description: (ticket) {{"{{$labels.sloth_service}}"}} {{"{{$labels.sloth_slo}}"}} SLO error
+        budget burn rate is too fast.
       summary: '{{"{{$labels.sloth_service}}"}} {{"{{$labels.sloth_slo}}"}} SLO error budget burn
         rate is over expected.'
       title: (ticket) {{"{{$labels.sloth_service}}"}} {{"{{$labels.sloth_slo}}"}} SLO error budget

@@ -362,6 +362,7 @@ or
 										"p_alert_annot": "p_label_an_1",
 										"summary":       "{{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget burn rate is over expected.",
 										"title":         "(page) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget burn rate is too fast.",
+										"description":   "(page) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget burn rate is too fast.",
 									},
 								},
 								{
@@ -386,6 +387,7 @@ or
 										"t_alert_annot": "t_label_an_1",
 										"summary":       "{{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget burn rate is over expected.",
 										"title":         "(ticket) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget burn rate is too fast.",
+										"description":   "(ticket) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget burn rate is too fast.",
 									},
 								},
 							},

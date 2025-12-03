@@ -221,13 +221,13 @@ groups:
       severity: critical
       sloth_severity: page
     annotations:
-      runbook: https://github.com/kubernetes-monitoring/kubernetes-mixin/tree/master/runbook.md#alert-name-kubeapierrorshigh
       summary: '{{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget burn
         rate is over expected.'
       title: (page) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget
         burn rate is too fast.
       description: (page) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget
         burn rate is too fast.
+      runbook: https://github.com/kubernetes-monitoring/kubernetes-mixin/tree/master/runbook.md#alert-name-kubeapierrorshigh
   - alert: K8sApiserverAvailabilityAlert
     expr: |
       (
@@ -246,13 +246,13 @@ groups:
       severity: warning
       sloth_severity: ticket
     annotations:
-      runbook: https://github.com/kubernetes-monitoring/kubernetes-mixin/tree/master/runbook.md#alert-name-kubeapierrorshigh
       summary: '{{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget burn
         rate is over expected.'
       title: (ticket) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget
         burn rate is too fast.
       description: (page) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget
         burn rate is too fast.
+      runbook: https://github.com/kubernetes-monitoring/kubernetes-mixin/tree/master/runbook.md#alert-name-kubeapierrorshigh
 - name: sloth-slo-sli-recordings-k8s-apiserver-requests-latency
   rules:
   - record: slo:sli_error:ratio_rate5m
@@ -505,13 +505,13 @@ groups:
       severity: critical
       sloth_severity: page
     annotations:
-      runbook: https://github.com/kubernetes-monitoring/kubernetes-mixin/tree/master/runbook.md#alert-name-kubeapilatencyhigh
       summary: '{{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget burn
         rate is over expected.'
       title: (page) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget
         burn rate is too fast.
       description: (page) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget
         burn rate is too fast.
+      runbook: https://github.com/kubernetes-monitoring/kubernetes-mixin/tree/master/runbook.md#alert-name-kubeapilatencyhigh
   - alert: K8sApiserverLatencyAlert
     expr: |
       (
@@ -530,10 +530,10 @@ groups:
       severity: warning
       sloth_severity: ticket
     annotations:
-      runbook: https://github.com/kubernetes-monitoring/kubernetes-mixin/tree/master/runbook.md#alert-name-kubeapilatencyhigh
       summary: '{{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget burn
         rate is over expected.'
       title: (ticket) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget
         burn rate is too fast.
       description: (ticket) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget
         burn rate is too fast.
+      runbook: https://github.com/kubernetes-monitoring/kubernetes-mixin/tree/master/runbook.md#alert-name-kubeapilatencyhigh

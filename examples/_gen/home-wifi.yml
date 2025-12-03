@@ -226,6 +226,7 @@ groups:
         burn rate is too fast.
       description: (page) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget
         burn rate is too fast.
+      runbook:
   - alert: GoodWifiClientSatisfaction
     expr: |
       (
@@ -249,6 +250,7 @@ groups:
         burn rate is too fast.
       description: (ticket) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget
         burn rate is too fast.
+      runbook:
 - name: sloth-slo-sli-recordings-home-wifi-risk-wifi-client-satisfaction
   rules:
   - record: slo:sli_error:ratio_rate5m
@@ -471,6 +473,7 @@ groups:
         burn rate is too fast.
       description: (page) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget
         burn rate is too fast.
+      runbook:
   - alert: RiskWifiClientSatisfaction
     expr: |
       (
@@ -494,3 +497,4 @@ groups:
         burn rate is too fast.
       description: (ticket) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget
         burn rate is too fast.
+      runbook:

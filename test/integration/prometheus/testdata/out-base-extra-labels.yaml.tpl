@@ -224,7 +224,6 @@ groups:
       alert02k1: alert02k2
       description: (page) {{"{{$labels.sloth_service}}"}} {{"{{$labels.sloth_slo}}"}} SLO error
         budget burn rate is too fast.
-      runbook: ''
       summary: '{{"{{$labels.sloth_service}}"}} {{"{{$labels.sloth_slo}}"}} SLO error budget burn
         rate is over expected.'
       title: (page) {{"{{$labels.sloth_service}}"}} {{"{{$labels.sloth_slo}}"}} SLO error budget
@@ -250,7 +249,6 @@ groups:
       alert02k1: alert02k2
       description: (ticket) {{"{{$labels.sloth_service}}"}} {{"{{$labels.sloth_slo}}"}} SLO error
         budget burn rate is too fast.
-      runbook: ''
       summary: '{{"{{$labels.sloth_service}}"}} {{"{{$labels.sloth_slo}}"}} SLO error budget burn
         rate is over expected.'
       title: (ticket) {{"{{$labels.sloth_service}}"}} {{"{{$labels.sloth_slo}}"}} SLO error budget

@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [0.17.0] - 2025-12-03
 ### Added
 - `./internal/prometheus/alert_rules.go` add `runbook` field to `extraAnnotations` map.
-- `./examples/_gen/*.yml`, `./internal/app/generate/prometheus_test.go`, `./internal/prometheus/alert_rules_test.go`, configure tests, templates and examples with new `runbook` field.
+- `./examples/_gen/*.yml`, `./internal/app/generate/prometheus_test.go`, `./internal/prometheus/alert_rules_test.go`, `./test/integration/*` configure tests, templates and examples with new `runbook` field.
 
 ## [0.16.0] - 2025-07-04
 ### Added

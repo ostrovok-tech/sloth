@@ -247,6 +247,7 @@ groups:
         burn rate is too fast.
       description: (page) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget
         burn rate is too fast.
+      runbook:
   - alert: WifiClientSatisfaction
     expr: |
       (
@@ -270,3 +271,4 @@ groups:
         burn rate is too fast.
       description: (ticket) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget
         burn rate is too fast.
+      runbook:

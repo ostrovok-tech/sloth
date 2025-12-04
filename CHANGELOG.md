@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+## [0.17.0] - 2025-12-03
+### Added
+- `./internal/prometheus/alert_rules.go` add `runbook` field to `extraAnnotations` map.
+- `./examples/_gen/*.yml`, `./internal/app/generate/prometheus_test.go`, `./internal/prometheus/alert_rules_test.go`, `./test/integration/*` configure tests, templates and examples with new `runbook` field.
+- Dependencies updated.
+
 ## [0.16.0] - 2025-07-04
 ### Added
 - `./internal/prometheus/alert_rules.go` add `description` field to `extraAnnotations` map.

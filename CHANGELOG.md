@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.18.0] - 2025-04-24
+### Changed
+- All mentions of `ostrovok-tech` were changed to `emergingtravel`.
+
+### Fixed
+- Pipeline error if repo name is not lowercased.
 
 ## [0.17.0] - 2025-12-03
 ### Added
@@ -73,7 +79,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - Update to **Go 1.23**.
 - `docker/dev/Dockerfile` Update **golangci** to **1.60.3**, **mokery** to **2.45.0**, **gomarkdoc** to **1.1.0**.
-- Retarget URLs and imports from [slok/sloth](https://github.com/slok/sloth/tree/main) to [ostrovok-tech/sloth](https://github.com/ostrovok-tech/sloth) repository.
+- Retarget URLs and imports from [slok/sloth](https://github.com/slok/sloth/tree/main) to [emergingtravel/sloth](https://github.com/emergingtravel/sloth) repository.
 - `CI` actions updated, docker build version changed.
 
 ## [v0.11.0] - 2022-10-22

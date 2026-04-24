@@ -26,8 +26,8 @@ FROM ${ALPINE_ARCH}/alpine:3.14
 
 ARG REF_NAME
 
-LABEL org.opencontainers.image.source="https://github.com/ostrovok-tech/sloth"
-LABEL org.opencontainers.image.description="Images of Sloth fork from https://github.com/ostrovok-tech/sloth"
+LABEL org.opencontainers.image.source="https://github.com/emergingtravel/sloth"
+LABEL org.opencontainers.image.description="Images of Sloth fork from https://github.com/emergingtravel/sloth"
 LABEL org.opencontainers.image.licenses="Apache-2.0"
 LABEL org.opencontainers.image.ref.name="${REF_NAME}"
 

@@ -6,7 +6,7 @@ import (
 
 	"gopkg.in/alecthomas/kingpin.v2"
 
-	"github.com/ostrovok-tech/sloth/internal/info"
+	"github.com/emergingtravel/sloth/internal/info"
 )
 
 type versionCommand struct{}

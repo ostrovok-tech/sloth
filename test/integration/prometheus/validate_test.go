@@ -6,7 +6,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/ostrovok-tech/sloth/test/integration/prometheus"
+	"github.com/emergingtravel/sloth/test/integration/prometheus"
 )
 
 func TestPrometheusValidate(t *testing.T) {

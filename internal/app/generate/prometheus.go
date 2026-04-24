@@ -6,10 +6,10 @@ import (
 
 	"github.com/prometheus/prometheus/model/rulefmt"
 
-	"github.com/ostrovok-tech/sloth/internal/alert"
-	"github.com/ostrovok-tech/sloth/internal/info"
-	"github.com/ostrovok-tech/sloth/internal/log"
-	"github.com/ostrovok-tech/sloth/internal/prometheus"
+	"github.com/emergingtravel/sloth/internal/alert"
+	"github.com/emergingtravel/sloth/internal/info"
+	"github.com/emergingtravel/sloth/internal/log"
+	"github.com/emergingtravel/sloth/internal/prometheus"
 )
 
 // ServiceConfig is the application service configuration.

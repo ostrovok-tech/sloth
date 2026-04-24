@@ -1,4 +1,4 @@
-module github.com/ostrovok-tech/sloth
+module github.com/emergingtravel/sloth
 
 go 1.24.1
 

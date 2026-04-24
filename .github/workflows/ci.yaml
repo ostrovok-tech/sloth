@@ -135,13 +135,18 @@ jobs:
     env:
       TAG_IMAGE_LATEST: "true"
       REF_NAME: "${{ github.ref_name }}"
-      PROD_IMAGE_NAME: ghcr.io/${GITHUB_REPOSITORY}
+      #PROD_IMAGE_NAME: ghcr.io/${GITHUB_REPOSITORY}
     # needs: [check, unit-test, integration-test-cli, integration-test-k8s, helm-chart-test]
     needs: [check, unit-test, integration-test-cli, helm-chart-test]
     name: Tagged release images
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Downcase REPO name
+        run: |
+          echo "PROD_IMAGE_NAME=ghcr.io/${GITHUB_REPOSITORY,,}" >> $GITHUB_ENV
+        id: downcase_repo
 
       - name: Extract tag
         shell: bash

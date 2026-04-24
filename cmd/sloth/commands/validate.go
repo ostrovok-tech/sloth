@@ -12,11 +12,11 @@ import (
 	prometheusmodel "github.com/prometheus/common/model"
 	"gopkg.in/alecthomas/kingpin.v2"
 
-	"github.com/ostrovok-tech/sloth/internal/alert"
-	"github.com/ostrovok-tech/sloth/internal/k8sprometheus"
-	"github.com/ostrovok-tech/sloth/internal/log"
-	"github.com/ostrovok-tech/sloth/internal/openslo"
-	"github.com/ostrovok-tech/sloth/internal/prometheus"
+	"github.com/emergingtravel/sloth/internal/alert"
+	"github.com/emergingtravel/sloth/internal/k8sprometheus"
+	"github.com/emergingtravel/sloth/internal/log"
+	"github.com/emergingtravel/sloth/internal/openslo"
+	"github.com/emergingtravel/sloth/internal/prometheus"
 )
 
 type validateCommand struct {

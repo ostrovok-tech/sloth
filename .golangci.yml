@@ -27,7 +27,7 @@ linters-settings:
           - github.com/VictoriaMetrics/metricsql
           - github.com/go-playground/validator
           - github.com/oklog/run
-          - github.com/ostrovok-tech
+          - github.com/emergingtravel
           - github.com/prometheus
           - github.com/sirupsen/logrus
           - github.com/slok/reload

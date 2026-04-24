@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.18.0] - 2025-04-24
 ### Changed
+- Update to **Go 1.25.0**.
+- `docker/dev/Dockerfile` update **golang** to **1.25.0**.
+- `docker/prod/Dockerfile` update **golang** to **1.25.0-alpine**.
 - All mentions of `ostrovok-tech` were changed to `emergingtravel`.
 
 ### Fixed

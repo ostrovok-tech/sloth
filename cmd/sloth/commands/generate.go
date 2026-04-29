@@ -150,7 +150,12 @@ func (g generateCommand) Run(ctx context.Context, config RootConfig) error {
 		if err != nil {
 			return fmt.Errorf("could not open SLOs spec file: %w", err)
 		}
-		defer f.Close()
+		defer func(f *os.File) {
+			err := f.Close()
+			if err != nil {
+				logger.Errorf("could not close SLOs spec file: %w", err)
+			}
+		}(f)
 
 		slxData, err := io.ReadAll(f)
 		if err != nil {
@@ -167,7 +172,12 @@ func (g generateCommand) Run(ctx context.Context, config RootConfig) error {
 			if err != nil {
 				return fmt.Errorf("could not create out file: %w", err)
 			}
-			defer f.Close()
+			defer func(f *os.File) {
+				err := f.Close()
+				if err != nil {
+					logger.Errorf("could not close out file: %w", err)
+				}
+			}(f)
 			out = outFile
 		}
 		for _, s := range splittedSLOsData {
@@ -208,7 +218,12 @@ func (g generateCommand) Run(ctx context.Context, config RootConfig) error {
 			if err != nil {
 				return fmt.Errorf("could not open SLOs spec file: %w", err)
 			}
-			defer f.Close()
+			defer func(f *os.File) {
+				err := f.Close()
+				if err != nil {
+					logger.Errorf("could not close SLOs spec file: %w", err)
+				}
+			}(f)
 
 			slxData, err := io.ReadAll(f)
 			if err != nil {
@@ -230,7 +245,12 @@ func (g generateCommand) Run(ctx context.Context, config RootConfig) error {
 			if err != nil {
 				return fmt.Errorf("could not create out file: %w", err)
 			}
-			defer outFile.Close()
+			defer func(outFile *os.File) {
+				err := outFile.Close()
+				if err != nil {
+					logger.Errorf("could not close out file: %w", err)
+				}
+			}(outFile)
 
 			// Split YAMLs in case we have multiple yaml files in a single file.
 			splittedSLOsData := splitYAML(slxData)

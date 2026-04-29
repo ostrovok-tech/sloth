@@ -10,9 +10,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `docker/dev/Dockerfile` update **golang** to **1.25.0**.
 - `docker/prod/Dockerfile` update **golang** to **1.25.0-alpine**.
 - All mentions of `ostrovok-tech` were changed to `emergingtravel`.
+- Update `golangci-lint` up to `2.11.4`.
+- Disable  `revive` and `depguard` linters.
 
 ### Fixed
 - Pipeline error if repo name is not lowercased.
+- Fix appeared linter issues.
 
 ## [0.17.0] - 2025-12-03
 ### Added

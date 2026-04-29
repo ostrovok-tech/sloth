@@ -59,7 +59,7 @@ func (k KubernetesService) EnsurePrometheusRule(ctx context.Context, pr *monitor
 	}
 
 	// Force overwrite.
-	pr.ObjectMeta.ResourceVersion = stored.ResourceVersion
+	pr.ResourceVersion = stored.ResourceVersion
 	_, err = k.monitoringCli.MonitoringV1().PrometheusRules(pr.Namespace).Update(ctx, pr, metav1.UpdateOptions{})
 	if err != nil {
 		return err

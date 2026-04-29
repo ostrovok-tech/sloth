@@ -189,7 +189,7 @@ func (p PrometheusOperatorCRDRepo) StoreSLOs(ctx context.Context, kmeta K8sMeta,
 	}
 
 	// Add object reference.
-	rule.ObjectMeta.OwnerReferences = append(rule.ObjectMeta.OwnerReferences, metav1.OwnerReference{
+	rule.OwnerReferences = append(rule.OwnerReferences, metav1.OwnerReference{
 		Kind:       kmeta.Kind,
 		APIVersion: kmeta.APIVersion,
 		Name:       kmeta.Name,

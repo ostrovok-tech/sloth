@@ -464,7 +464,7 @@ type kooperlogger struct {
 }
 
 func (k kooperlogger) WithKV(kv kooperlog.KV) kooperlog.Logger {
-	return kooperlogger{Logger: k.Logger.WithValues(log.Kv(kv))}
+	return kooperlogger{Logger: k.WithValues(log.Kv(kv))}
 }
 
 // generatorLogger is app service generator logger that will set the info messages as debug,

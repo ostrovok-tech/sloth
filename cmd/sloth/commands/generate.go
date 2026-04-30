@@ -16,15 +16,15 @@ import (
 	prometheusmodel "github.com/prometheus/common/model"
 	"gopkg.in/alecthomas/kingpin.v2"
 
-	"github.com/ostrovok-tech/sloth/internal/alert"
-	"github.com/ostrovok-tech/sloth/internal/app/generate"
-	"github.com/ostrovok-tech/sloth/internal/info"
-	"github.com/ostrovok-tech/sloth/internal/k8sprometheus"
-	"github.com/ostrovok-tech/sloth/internal/log"
-	"github.com/ostrovok-tech/sloth/internal/openslo"
-	"github.com/ostrovok-tech/sloth/internal/prometheus"
-	kubernetesv1 "github.com/ostrovok-tech/sloth/pkg/kubernetes/api/sloth/v1"
-	prometheusv1 "github.com/ostrovok-tech/sloth/pkg/prometheus/api/v1"
+	"github.com/emergingtravel/sloth/internal/alert"
+	"github.com/emergingtravel/sloth/internal/app/generate"
+	"github.com/emergingtravel/sloth/internal/info"
+	"github.com/emergingtravel/sloth/internal/k8sprometheus"
+	"github.com/emergingtravel/sloth/internal/log"
+	"github.com/emergingtravel/sloth/internal/openslo"
+	"github.com/emergingtravel/sloth/internal/prometheus"
+	kubernetesv1 "github.com/emergingtravel/sloth/pkg/kubernetes/api/sloth/v1"
+	prometheusv1 "github.com/emergingtravel/sloth/pkg/prometheus/api/v1"
 )
 
 type generateCommand struct {
@@ -150,7 +150,12 @@ func (g generateCommand) Run(ctx context.Context, config RootConfig) error {
 		if err != nil {
 			return fmt.Errorf("could not open SLOs spec file: %w", err)
 		}
-		defer f.Close()
+		defer func(f *os.File) {
+			err := f.Close()
+			if err != nil {
+				logger.Errorf("could not close SLOs spec file: %w", err)
+			}
+		}(f)
 
 		slxData, err := io.ReadAll(f)
 		if err != nil {
@@ -167,7 +172,12 @@ func (g generateCommand) Run(ctx context.Context, config RootConfig) error {
 			if err != nil {
 				return fmt.Errorf("could not create out file: %w", err)
 			}
-			defer f.Close()
+			defer func(f *os.File) {
+				err := f.Close()
+				if err != nil {
+					logger.Errorf("could not close out file: %w", err)
+				}
+			}(f)
 			out = outFile
 		}
 		for _, s := range splittedSLOsData {
@@ -208,7 +218,12 @@ func (g generateCommand) Run(ctx context.Context, config RootConfig) error {
 			if err != nil {
 				return fmt.Errorf("could not open SLOs spec file: %w", err)
 			}
-			defer f.Close()
+			defer func(f *os.File) {
+				err := f.Close()
+				if err != nil {
+					logger.Errorf("could not close SLOs spec file: %w", err)
+				}
+			}(f)
 
 			slxData, err := io.ReadAll(f)
 			if err != nil {
@@ -230,7 +245,12 @@ func (g generateCommand) Run(ctx context.Context, config RootConfig) error {
 			if err != nil {
 				return fmt.Errorf("could not create out file: %w", err)
 			}
-			defer outFile.Close()
+			defer func(outFile *os.File) {
+				err := outFile.Close()
+				if err != nil {
+					logger.Errorf("could not close out file: %w", err)
+				}
+			}(outFile)
 
 			// Split YAMLs in case we have multiple yaml files in a single file.
 			splittedSLOsData := splitYAML(slxData)

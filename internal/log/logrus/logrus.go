@@ -5,7 +5,7 @@ import (
 
 	"github.com/sirupsen/logrus"
 
-	"github.com/ostrovok-tech/sloth/internal/log"
+	"github.com/emergingtravel/sloth/internal/log"
 )
 
 type logger struct {
@@ -18,7 +18,7 @@ func NewLogrus(l *logrus.Entry) log.Logger {
 }
 
 func (l logger) WithValues(kv log.Kv) log.Logger {
-	newLogger := l.Entry.WithFields(kv)
+	newLogger := l.WithFields(kv)
 	return NewLogrus(newLogger)
 }
 

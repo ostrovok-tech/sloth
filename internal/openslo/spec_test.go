@@ -7,8 +7,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/ostrovok-tech/sloth/internal/openslo"
-	"github.com/ostrovok-tech/sloth/internal/prometheus"
+	"github.com/emergingtravel/sloth/internal/openslo"
+	"github.com/emergingtravel/sloth/internal/prometheus"
 )
 
 func TestYAMLoadSpec(t *testing.T) {

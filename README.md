@@ -3,10 +3,10 @@
 </p>
 
 # Sloth
-[![Apache 2 licensed](https://img.shields.io/badge/license-Apache2-blue.svg)](https://raw.githubusercontent.com/ostrovok-tech/sloth/main/LICENSE)
-[![CI](https://github.com/ostrovok-tech/sloth/actions/workflows/ci.yaml/badge.svg?branch=main)](https://github.com/ostrovok-tech/sloth/actions/workflows/ci.yaml)
-[![Go Report Card](https://goreportcard.com/badge/github.com/ostrovok-tech/sloth)](https://goreportcard.com/report/github.com/ostrovok-tech/sloth)
-[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/ostrovok-tech/sloth)](https://github.com/ostrovok-tech/sloth/releases/latest)
+[![Apache 2 licensed](https://img.shields.io/badge/license-Apache2-blue.svg)](https://raw.githubusercontent.com/emergingtravel/sloth/main/LICENSE)
+[![CI](https://github.com/emergingtravel/sloth/actions/workflows/ci.yaml/badge.svg?branch=main)](https://github.com/emergingtravel/sloth/actions/workflows/ci.yaml)
+[![Go Report Card](https://goreportcard.com/badge/github.com/emergingtravel/sloth)](https://goreportcard.com/report/github.com/emergingtravel/sloth)
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/emergingtravel/sloth)](https://github.com/emergingtravel/sloth/releases/latest)
 [![OpenSLO](https://img.shields.io/badge/OpenSLO-v1alpha-green?color=4974EA&style=flat)](https://github.com/OpenSLO/OpenSLO#slo)
 <!-- ![Kubernetes release](https://img.shields.io/badge/Kubernetes-v1.25-green?logo=Kubernetes&style=flat&color=326CE5&logoColor=white) -->
 

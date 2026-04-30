@@ -12,11 +12,11 @@ import (
 	prometheusmodel "github.com/prometheus/common/model"
 	"gopkg.in/alecthomas/kingpin.v2"
 
-	"github.com/ostrovok-tech/sloth/internal/alert"
-	"github.com/ostrovok-tech/sloth/internal/k8sprometheus"
-	"github.com/ostrovok-tech/sloth/internal/log"
-	"github.com/ostrovok-tech/sloth/internal/openslo"
-	"github.com/ostrovok-tech/sloth/internal/prometheus"
+	"github.com/emergingtravel/sloth/internal/alert"
+	"github.com/emergingtravel/sloth/internal/k8sprometheus"
+	"github.com/emergingtravel/sloth/internal/log"
+	"github.com/emergingtravel/sloth/internal/openslo"
+	"github.com/emergingtravel/sloth/internal/prometheus"
 )
 
 type validateCommand struct {
@@ -152,12 +152,12 @@ func (v validateCommand) Run(ctx context.Context, config RootConfig) error {
 				if promErr == nil {
 					err := gen.GeneratePrometheus(ctx, *slos, io.Discard)
 					if err != nil {
-						validation.Errs = []error{fmt.Errorf("Could not generate Prometheus format rules: %w", err)}
+						validation.Errs = []error{fmt.Errorf("could not generate Prometheus format rules: %w", err)}
 					}
 					continue
 				}
 
-				validation.Errs = []error{fmt.Errorf("Tried loading raw prometheus SLOs spec, it couldn't: %w", promErr)}
+				validation.Errs = []error{fmt.Errorf("tried loading raw prometheus SLOs spec, it couldn't: %w", promErr)}
 
 			case kubeYAMLLoader.IsSpecType(ctx, dataB):
 				sloGroup, k8sErr := kubeYAMLLoader.LoadSpec(ctx, dataB)
@@ -169,22 +169,22 @@ func (v validateCommand) Run(ctx context.Context, config RootConfig) error {
 					continue
 				}
 
-				validation.Errs = []error{fmt.Errorf("Tried loading Kubernetes prometheus SLOs spec, it couldn't: %w", k8sErr)}
+				validation.Errs = []error{fmt.Errorf("tried loading Kubernetes prometheus SLOs spec, it couldn't: %w", k8sErr)}
 
 			case openSLOYAMLLoader.IsSpecType(ctx, dataB):
 				slos, openSLOErr := openSLOYAMLLoader.LoadSpec(ctx, dataB)
 				if openSLOErr == nil {
 					err := gen.GenerateOpenSLO(ctx, *slos, io.Discard)
 					if err != nil {
-						validation.Errs = []error{fmt.Errorf("Could not generate OpenSLO format rules: %w", err)}
+						validation.Errs = []error{fmt.Errorf("could not generate OpenSLO format rules: %w", err)}
 					}
 					continue
 				}
 
-				validation.Errs = []error{fmt.Errorf("Tried loading OpenSLO SLOs spec, it couldn't: %s", openSLOErr)}
+				validation.Errs = []error{fmt.Errorf("tried loading OpenSLO SLOs spec, it couldn't: %s", openSLOErr)}
 
 			default:
-				validation.Errs = []error{fmt.Errorf("Unknown spec type")}
+				validation.Errs = []error{fmt.Errorf("unknown spec type")}
 			}
 		}
 

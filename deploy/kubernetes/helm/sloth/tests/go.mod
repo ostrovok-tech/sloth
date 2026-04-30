@@ -1,4 +1,4 @@
-module github.com/ostrovok-tech/sloth/helm
+module github.com/emergingtravel/sloth/helm
 
 go 1.25.0
 

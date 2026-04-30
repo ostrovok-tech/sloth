@@ -12,9 +12,8 @@ import (
 	"github.com/traefik/yaegi/interp"
 	"github.com/traefik/yaegi/stdlib"
 
-	"github.com/ostrovok-tech/sloth/internal/log"
-	"github.com/ostrovok-tech/sloth/pkg/prometheus/plugin/v1"
-	pluginv1 "github.com/ostrovok-tech/sloth/pkg/prometheus/plugin/v1"
+	"github.com/emergingtravel/sloth/internal/log"
+	"github.com/emergingtravel/sloth/pkg/prometheus/plugin/v1"
 )
 
 // FileManager knows how to manage files.
@@ -232,8 +231,8 @@ func (s sliPluginLoader) LoadRawSLIPlugin(ctx context.Context, src string) (*SLI
 		return nil, fmt.Errorf("could not get plugin version: %w", err)
 	}
 
-	pluginVer, ok := pluginVerTmp.Interface().(pluginv1.SLIPluginVersion)
-	if !ok || (pluginVer != pluginv1.Version) {
+	pluginVer, ok := pluginVerTmp.Interface().(plugin.SLIPluginVersion)
+	if !ok || (pluginVer != plugin.Version) {
 		return nil, fmt.Errorf("unsuported plugin version: %s", pluginVer)
 	}
 
@@ -243,7 +242,7 @@ func (s sliPluginLoader) LoadRawSLIPlugin(ctx context.Context, src string) (*SLI
 		return nil, fmt.Errorf("could not get plugin ID: %w", err)
 	}
 
-	pluginID, ok := pluginIDTmp.Interface().(pluginv1.SLIPluginID)
+	pluginID, ok := pluginIDTmp.Interface().(plugin.SLIPluginID)
 	if !ok {
 		return nil, fmt.Errorf("invalid SLI plugin ID type")
 	}
@@ -254,7 +253,7 @@ func (s sliPluginLoader) LoadRawSLIPlugin(ctx context.Context, src string) (*SLI
 		return nil, fmt.Errorf("could not get plugin: %w", err)
 	}
 
-	pluginFunc, ok := pluginFuncTmp.Interface().(pluginv1.SLIPlugin)
+	pluginFunc, ok := pluginFuncTmp.Interface().(plugin.SLIPlugin)
 	if !ok {
 		return nil, fmt.Errorf("invalid SLI plugin type")
 	}

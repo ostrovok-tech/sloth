@@ -6,7 +6,7 @@ import (
 
 	"gopkg.in/alecthomas/kingpin.v2"
 
-	"github.com/ostrovok-tech/sloth/internal/info"
+	"github.com/emergingtravel/sloth/internal/info"
 )
 
 type versionCommand struct{}
@@ -24,6 +24,9 @@ func (versionCommand) Name() string {
 }
 
 func (versionCommand) Run(_ context.Context, config RootConfig) error {
-	fmt.Fprintf(config.Stdout, "%s\n", info.Version)
+	_, err := fmt.Fprintf(config.Stdout, "%s\n", info.Version)
+	if err != nil {
+		return err
+	}
 	return nil
 }
